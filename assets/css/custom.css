@@ -143,6 +143,7 @@ body {
 
 .text-with-button-main-link {
   margin-top: 37px;
+  font-size: 18px;
 }
 
 @media (max-width: 992px) {
@@ -596,10 +597,10 @@ html {
   margin-bottom: 1px;
 }
 
-.site-header-wrapper.active .header-right a {
+/* .site-header-wrapper.active .header-right a {
   opacity: 0;
   visibility: hidden;
-}
+} */
 
 .main-logo-svg-wrapper {
   display: flex;
@@ -658,7 +659,7 @@ html {
 }
 
 .header-burger-menu.active {
-  transform: translateY(-9px);
+  transform: translateY(-8px);
   opacity: 1;
   pointer-events: auto;
 }
@@ -682,6 +683,10 @@ html {
 .hb-menu {
   display: flex;
   gap: 160px;
+}
+
+.hb-menu , .hb-menu-with-img, .hb-side, .hb-grid, .header-burger-menu-wrapper{
+  height: 100%;
 }
 
 .hb-right {
@@ -718,6 +723,26 @@ html {
   font-weight: 600;
   line-height: 125%;
   letter-spacing: -1.44px;
+}
+
+.hb-menu__link:not(.hb-menu__link.has-submenu) {
+  position: relative;
+}
+
+.hb-menu__link:not(.hb-menu__link.has-submenu)::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  width: 0%;
+  height: 1px;
+  transition: all 0.3s ease;
+  
+}
+
+.hb-menu__link:not(.hb-menu__link.has-submenu):hover::after{
+  width: 100%;
 }
 
 .hb-menu__list {
@@ -765,10 +790,6 @@ html {
   max-width: 367px;
 }
 
-.hb-static-media {
-  margin-top: 220px;
-}
-
 .hb-media__imgage-mobile {
   display: none;
 }
@@ -780,10 +801,17 @@ html {
 }
 
 @media (max-width: 992px) {
+  .hb-menu__link:not(.hb-menu__link.has-submenu)::after{
+    display: none;
+  }
   .hb-menu__list .hb-menu__link:not(:last-child) {
     padding-bottom: 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
+  }
+
+  .hb-menu__list .hb-menu__link:not(:first-child) {
+    padding-top: 8px;
   }
 
   .hb-menu__link {
@@ -1296,6 +1324,14 @@ html {
   padding-bottom: 200px;
 }
 
+/* Parallax items */
+.grid-section-item {
+  will-change: transform, opacity;
+  transform: translate3d(0, 100px, 0);
+  opacity: 0;
+  transition: opacity 0.6s linear;
+}
+
 @media (max-width: 1200px) {
   .grid-section-wrapper-top-duo.grid-section-wrapper-top {
     gap: 100px;
@@ -1309,6 +1345,9 @@ html {
 }
 
 @media (max-width: 992px) {
+  .grid-section-item-1 img{
+    max-width: 100%;
+  }
   .grid-section-wrapper-top-duo.grid-section-wrapper-top {
     grid-template-columns: repeat(1, 1fr);
     gap: 48px;
@@ -2010,6 +2049,7 @@ html {
 
   .services-tabs__inner {
     padding: 80px 24px;
+    padding-right: 0;
   }
 
   .services-slide__text {

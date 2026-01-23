@@ -7,7 +7,6 @@
         $img   = get_sub_field('image');
         $url_f = get_sub_field('url');
 
-        // url может быть Link field (array) или строкой
         $href = '';
         $target = '_self';
         if (is_array($url_f)) {
@@ -254,7 +253,7 @@
 
                 if (window.matchMedia('(max-width: 992px)').matches && !swiperEl.swiper) {
                     new Swiper(swiperEl, {
-                        slidesPerView: 1.1,
+                        slidesPerView: 1.08,
                         spaceBetween: 16,
                         speed: 600,
                     });
