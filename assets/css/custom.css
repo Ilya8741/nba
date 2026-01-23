@@ -587,7 +587,7 @@ html {
 
 .header-open.active .header-open-menu,
 .header-open.active .header-open-close {
-  transform: translateY(-12px);
+  transform: translateY(-14px);
 }
 
 .site-header-wrapper .header-right a {
