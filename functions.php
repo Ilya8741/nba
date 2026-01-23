@@ -1,15 +1,15 @@
 <?php
 /**
- * project-london functions and definitions
+ * nba functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package project-london
+ * @package nba
  */
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '3.0.0' );
+	define( '_S_VERSION', '3.4.8' );
 }
 
 /**
@@ -19,14 +19,14 @@ if ( ! defined( '_S_VERSION' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function project_london_setup() {
+function nba_setup() {
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on project-london, use a find and replace
-		* to change 'project-london' to the name of your theme in all the template files.
+		* If you're building a theme based on nba, use a find and replace
+		* to change 'nba' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( 'project-london', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'nba', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -49,7 +49,7 @@ function project_london_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'project-london' ),
+			'menu-1' => esc_html__( 'Primary', 'nba' ),
 		)
 	);
 
@@ -74,7 +74,7 @@ function project_london_setup() {
 	add_theme_support(
 		'custom-background',
 		apply_filters(
-			'project_london_custom_background_args',
+			'nba_custom_background_args',
 			array(
 				'default-color' => 'ffffff',
 				'default-image' => '',
@@ -100,7 +100,7 @@ function project_london_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'project_london_setup' );
+add_action( 'after_setup_theme', 'nba_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -109,22 +109,22 @@ add_action( 'after_setup_theme', 'project_london_setup' );
  *
  * @global int $content_width
  */
-function project_london_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'project_london_content_width', 640 );
+function nba_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'nba_content_width', 640 );
 }
-add_action( 'after_setup_theme', 'project_london_content_width', 0 );
+add_action( 'after_setup_theme', 'nba_content_width', 0 );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function project_london_widgets_init() {
+function nba_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'project-london' ),
+			'name'          => esc_html__( 'Sidebar', 'nba' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'project-london' ),
+			'description'   => esc_html__( 'Add widgets here.', 'nba' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -132,12 +132,12 @@ function project_london_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 'project_london_widgets_init' );
+add_action( 'widgets_init', 'nba_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
  */
-function project_london_scripts() {
+function nba_scripts() {
 
   /* ===== CSS ===== */
   wp_enqueue_style(
@@ -147,8 +147,8 @@ function project_london_scripts() {
     filemtime(get_stylesheet_directory() . '/assets/css/fonts.css')
   );
 
-  wp_enqueue_style('project-london-style', get_stylesheet_uri(), [], _S_VERSION);
-  wp_style_add_data('project-london-style', 'rtl', 'replace');
+  wp_enqueue_style('nba-style', get_stylesheet_uri(), [], _S_VERSION);
+  wp_style_add_data('nba-style', 'rtl', 'replace');
 
   // AOS (CSS)
   wp_enqueue_style(
@@ -167,9 +167,9 @@ function project_london_scripts() {
   );
 
   wp_enqueue_style(
-    'project-london-custom',
+    'nba-custom',
     get_template_directory_uri() . '/assets/css/custom.css',
-    ['project-london-style', 'theme-fonts', 'aos', 'swiper-css'],
+    ['nba-style', 'theme-fonts', 'aos', 'swiper-css'],
     _S_VERSION
   );
 
@@ -177,7 +177,7 @@ function project_london_scripts() {
 
   // Header menu
   wp_enqueue_script(
-    'project-london-burger',
+    'nba-burger',
     get_template_directory_uri() . '/assets/js/header-menu.js',
     [],
     _S_VERSION,
@@ -193,7 +193,7 @@ function project_london_scripts() {
     true
   );
   wp_enqueue_script(
-    'project-london-swiper-init',
+    'nba-swiper-init',
     get_template_directory_uri() . '/assets/js/swiper-init.js',
     ['swiper-js'],
     _S_VERSION,
@@ -201,24 +201,20 @@ function project_london_scripts() {
   );
 
   wp_enqueue_script(
-    'project-london-navigation',
+    'nba-navigation',
     get_template_directory_uri() . '/js/navigation.js',
     [],
     _S_VERSION,
     true
   );
 
-  $fd_rel = '/assets/js/file-drop.js';
-  $fd_path = get_stylesheet_directory() . $fd_rel;
-  $fd_uri  = get_stylesheet_directory_uri() . $fd_rel;
-
-  wp_enqueue_script(
-    'file-drop',
-    $fd_uri,
-    [],       
-    file_exists($fd_path) ? filemtime($fd_path) : null,
-    true
-  );
+  // wp_enqueue_script(
+  //   'file-drop',
+  //   $fd_uri,
+  //   [],       
+  //   file_exists($fd_path) ? filemtime($fd_path) : null,
+  //   true
+  // );
 
   // AOS (JS)
   wp_enqueue_script(
@@ -257,7 +253,7 @@ function project_london_scripts() {
   }
   wp_add_inline_script('gsap-scrolltrigger', 'if(window.gsap&&window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);}');
 
-  wp_add_inline_style('project-london-custom', '
+  wp_add_inline_style('nba-custom', '
     .plb-swiper{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;height:min(70vh,900px);}
     .plb-swiper .swiper-slide{display:flex;align-items:center;justify-content:center;transition:transform .25s ease, opacity .25s ease;opacity:.5;}
     .plb-swiper .swiper-slide.swiper-slide-active{opacity:1;transform:scale(1);}
@@ -267,19 +263,18 @@ function project_london_scripts() {
   ');
 
   wp_enqueue_script(
-    'project-swiper-lightbox',
+    'nba-swiper-lightbox',
     get_template_directory_uri() . '/assets/js/swiper-lightbox.js',
     ['swiper-js'],
     _S_VERSION,
     true
   );
 
-  // Комменты
   if ( is_singular() && comments_open() && get_option('thread_comments') ) {
     wp_enqueue_script('comment-reply');
   }
 }
-add_action('wp_enqueue_scripts', 'project_london_scripts');
+add_action('wp_enqueue_scripts', 'nba_scripts');
 
 
 /**
@@ -382,23 +377,4 @@ add_action('init', function () {
     'taxonomies'      => ['category','post_tag'],
   ]);
 
-  // Insights
-  register_post_type('insights', [
-    'label'           => 'Insights',
-    'labels'          => [
-      'name' => 'Insights', 'singular_name' => 'Insight',
-      'add_new' => 'Add Insight', 'add_new_item' => 'Add Insight',
-      'edit_item' => 'Edit Insight', 'new_item' => 'New Insight',
-      'view_item' => 'View Insight', 'search_items' => 'Search Insights',
-      'not_found' => 'No insights found', 'not_found_in_trash' => 'No insights in trash',
-      'all_items' => 'All Insights'
-    ],
-    'public'          => true,
-    'has_archive'     => true, 
-    'rewrite'         => ['slug' => 'insights'],
-    'show_in_rest'    => true,
-    'menu_icon'       => 'dashicons-lightbulb',
-    'supports'        => ['title','editor','thumbnail','excerpt','revisions'],
-    'taxonomies'      => ['category','post_tag'],
-  ]);
 });

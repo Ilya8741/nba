@@ -29,14 +29,14 @@ if ($items && is_array($items) && count($items)) :
         <div class="process-slider-nav">
             <div class="process-slider-prev process-slider-nav-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M8.73535 17.1475L0.250071 8.66218L8.73535 0.176898" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
-                    <path d="M17.2206 8.66218L0.250071 8.66218" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
+                    <path d="M8.98535 17.3242L0.500071 8.83894L8.98535 0.353656" stroke="black" stroke-linejoin="round" />
+                    <path d="M17.4706 8.83894L0.500071 8.83894" stroke="black" stroke-linejoin="round" />
                 </svg>
             </div>
             <div class="process-slider-next process-slider-nav-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M8.48535 0.176758L16.9706 8.66204L8.48535 17.1473" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
-                    <path d="M7.03335e-05 8.66204H16.9706" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
+                    <path d="M8.48535 0.353516L16.9706 8.8388L8.48535 17.3241" stroke="black" stroke-linejoin="round" />
+                    <path d="M7.03335e-05 8.8388H16.9706" stroke="black" stroke-linejoin="round" />
                 </svg>
             </div>
         </div>
@@ -69,66 +69,5 @@ if ($items && is_array($items) && count($items)) :
             });
         });
     </script>
-
-    <style>
-        .process-card {
-            padding: 32px;
-            background: #fff;
-        }
-
-        .process-subtitle {
-            color: #717171;
-
-            font-family: "Public Sans", sans-serif;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 300;
-            line-height: 140%;
-            /* 22.4px */
-            letter-spacing: -0.4px;
-        }
-
-        .process-title {
-            color: #2B2B2B;
-
-            /* Desktop/H7 */
-            font-family: "Test Newzald", sans-serif;
-            font-size: 24px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 130%;
-            /* 31.2px */
-            letter-spacing: -0.4px;
-            display: block;
-            margin: 4px 0 8px 0;
-        }
-
-        .process-text p {
-            color: #2B2B2B;
-
-            font-family: "Public Sans", sans-serif;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 300;
-            line-height: 140%;
-            /* 22.4px */
-            letter-spacing: -0.4px;
-        }
-
-        .process-swiper .swiper-wrapper {
-            align-items: stretch;
-        }
-
-        .process-swiper .swiper-slide {
-            display: flex;
-            height: auto;
-        }
-
-        .process-card {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-    </style>
 <?php
-endif;
+endif; ?>

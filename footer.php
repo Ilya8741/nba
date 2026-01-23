@@ -10,221 +10,138 @@
 <footer id="colophon" class="site-footer" data-theme="dark">
 	<div class="site-footer-wrapper">
 		<div class="site-footer-header">
-			<?php if ($title = get_field('header_title', 'footer_options')) : ?>
-				<h2 class="footer-title"><?php echo esc_html($title); ?></h2>
-			<?php endif; ?>
-			<div class="site-footer-header-links-wrapper">
-				<?php if ($image1 = get_field('footer_image1', 'footer_options')) : ?>
-					<?php if ($image_link1 = get_field('footer_image_link1', 'footer_options')) : ?>
-						<a href="<?php echo esc_html($image_link1); ?>" target="_blank">
-							<?php
-							echo wp_get_attachment_image(
-								$image1['ID'],
-								'full',
-								false,
-								[
-									'class' => 'footer-main-image',
-									'alt'   => esc_attr($image1['alt'] ?? ''),
-								]
-							);
-							?>
-						</a>
-					<?php endif; ?>
-				<?php endif; ?>
-				<?php if ($image2 = get_field('footer_image2', 'footer_options')) : ?>
-					<?php if ($image_link2 = get_field('footer_image_link2', 'footer_options')) : ?>
-						<a href="<?php echo esc_html($image_link2); ?>" target="_blank">
-							<?php
-							echo wp_get_attachment_image(
-								$image2['ID'],
-								'full',
-								false,
-								[
-									'class' => 'footer-main-image',
-									'alt'   => esc_attr($image2['alt'] ?? ''),
-								]
-							);
-							?>
-						</a>
-					<?php endif; ?>
-				<?php endif; ?>
+			<div class="site-footer-header-links-wrapper" data-aos="fade-up" data-aos-duration="1000">
+		<?php
+      $image1 = get_field('footer_image1', 'footer_options');
+
+      $image1_id  = 0;
+      $image1_alt = '';
+
+      if (is_array($image1)) {
+        $image1_id  = (int) ($image1['ID'] ?? 0);
+        $image1_alt = (string) ($image1['alt'] ?? '');
+      } elseif (is_numeric($image1)) {
+        $image1_id = (int) $image1;
+      }
+      ?>
+
+      <?php if ($image1_id) : ?>
+        <?php
+        echo wp_get_attachment_image(
+          $image1_id,
+          'full',
+          false,
+          [
+            'class' => 'footer-main-image',
+            'alt'   => esc_attr($image1_alt),
+          ]
+        );
+        ?>
+      <?php endif; ?>
+
 			</div>
-
-
 		</div>
-
-		<div class="footer-buttons">
-			<?php
-			$work_text  = get_field('work_button_text', 'footer_options');
-			$work_title = get_field('footer_popup_title', 'footer_options');
-			$work_form  = get_field('footer_contact_form', 'footer_options', false);
-			$footer_tpl_id = 'footer-contact-modal';
-			?>
-
-			<?php if ($work_text): ?>
-				<button type="button"
-					class="footer-white-main-button main-button"
-					data-modal="#<?php echo esc_attr($footer_tpl_id); ?>">
-					<span><?php echo esc_html($work_text); ?></span>
-					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-						<path d="M1 1H13V13" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-						<path d="M1 13L13 1" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-					</svg>
-				</button>
-
-				<div id="<?php echo esc_attr($footer_tpl_id); ?>" class="team-modal-template contact-team-modal-template" hidden>
-					<div class="team-modal__inner">
-						<div class="team-modal__text">
-							<?php if ($work_title): ?>
-								<h3 class="team-modal__title"><?php echo esc_html($work_title); ?></h3>
-							<?php endif; ?>
-							<?php if ($work_form): ?>
-								<div class="team-modal__content contact-team-modal__content">
-									<?php echo do_shortcode(shortcode_unautop($work_form)); ?>
-								</div>
-							<?php endif; ?>
-						</div>
-					</div>
-				</div>
-			<?php endif; ?>
-
-      		<?php
-			$start_text  = get_field('start_project_button', 'footer_options');
-			$start_form  = get_field('start_project_form', 'footer_options', false);
-			$footer_start_id = 'footer-start-modal';
-			?>
-
-				<?php if ($start_text): ?>
-				<button type="button"
-					class="footer-white-main-button main-button"
-					data-modal="#<?php echo esc_attr($footer_start_id); ?>">
-					<span><?php echo esc_html($start_text); ?></span>
-					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-						<path d="M1 1H13V13" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-						<path d="M1 13L13 1" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-					</svg>
-				</button>
-
-				<div id="<?php echo esc_attr($footer_start_id); ?>" class="team-modal-template contact-team-modal-template" hidden>
-					<div class="team-modal__inner">
-						<div class="team-modal__text">
-							<h3 class="team-modal__title">Start a project</h3>
-							<?php if ($start_form): ?>
-								<div class="team-modal__content contact-team-modal__content">
-									<?php echo do_shortcode(shortcode_unautop($start_form)); ?>
-								</div>
-							<?php endif; ?>
-						</div>
-					</div>
-				</div>
-			<?php endif; ?>
-
-			<?php
-			$sub_text = get_field('subscribe_button_text', 'footer_options') ?: 'Subscribe';
-			$sub_url  = get_field('subscribe_button_url', 'footer_options');
-			$default_url = 'https://projectlondon.us8.list-manage.com/subscribe?u=ca0f0110a4a4b3a9a3ee89dee&id=9e0d6a222e';
-			?>
-
-			<a href="<?php echo esc_url($sub_url ?: $default_url); ?>"
-				class="footer-black-main-button main-button"
-				target="_blank" rel="noopener">
-				<span><?php echo esc_html($sub_text); ?></span>
-				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-					<path d="M1 1H13V13" stroke="white" stroke-width="0.5" stroke-linejoin="round" />
-					<path d="M1 13L13 1" stroke="white" stroke-width="0.5" stroke-linejoin="round" />
-				</svg>
-			</a>
-
-	
-
-		</div>
-		<div class="footer-info">
-			<div class="footer-info-richtext">
+		<div class="footer-info" data-aos="fade-left" data-aos-duration="1000">
+			<div class="footer-info-wrapper">
 				<?php if ($html = get_field('footer_info', 'footer_options')) : ?>
+          <div class="footer-info-richtext">
 					<div class="footer-wysiwyg">
 						<?php echo wp_kses_post($html); ?>
 					</div>
+          </div>
 				<?php endif; ?>
 
-				<?php if (have_rows('footer_social_icons', 'footer_options')) : ?>
-					<div class="footer-socials">
-						<?php while (have_rows('footer_social_icons', 'footer_options')) : the_row();
-							$img = get_sub_field('icon');
-							$url = (string) get_sub_field('icon_url');
-							if (empty($img) || empty($img['ID'])) continue;
+        	<div class="footer-buttons">
+          <?php
+          $work_text  = get_field('work_button_text', 'footer_options');
+          $work_title = get_field('footer_popup_title', 'footer_options');
+          $work_form  = get_field('footer_contact_form', 'footer_options', false);
+          $footer_tpl_id = 'footer-contact-modal';
+          ?>
 
-							$img_html = wp_get_attachment_image(
-								$img['ID'],
-								'full',
-								false,
-								[
-									'class' => 'footer-socials__icon',
-									'alt'   => esc_attr($img['alt'] ?? ''),
-								]
-							);
-						?>
-							<div class="footer-socials__item">
-								<?php if ($url !== '') : ?>
-									<a class="footer-socials__link"
-										href="<?php echo esc_url($url); ?>"
-										target="_blank" rel="noopener nofollow"
-										aria-label="social link">
-										<?php echo $img_html; ?>
-									</a>
-								<?php else : ?>
-									<?php echo $img_html; ?>
-								<?php endif; ?>
-							</div>
-						<?php endwhile; ?>
-					</div>
-				<?php endif; ?>
-			</div>
-			<?php if (have_rows('footer_menu', 'footer_options')) : ?>
-				<div class="footer-menu">
-					<?php while (have_rows('footer_menu', 'footer_options')) : the_row();
-						$link = get_sub_field('footer_link');
-						$text = trim((string) get_sub_field('footer_link_text'));
-						if (empty($link) || empty($link['url'])) continue;
+          <?php if ($work_text): ?>
+            <button type="button"
+              class="footer-white-main-button"
+              data-modal="#<?php echo esc_attr($footer_tpl_id); ?>">
+              <span><?php echo esc_html($work_text); ?></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 7H17V17" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+                <path d="M7 17L17 7" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+              </svg>
+            </button>
 
-						$label  = $text !== '' ? $text : ($link['title'] ?? '');
-						$target = !empty($link['target']) ? ' target="_blank" rel="noopener"' : '';
-					?>
+            <div id="<?php echo esc_attr($footer_tpl_id); ?>" class="team-modal-template contact-team-modal-template" hidden>
+              <div class="team-modal__inner">
+                <div class="team-modal__text">
+                  <?php if ($work_title): ?>
+                    <h3 class="team-modal__title"><?php echo esc_html($work_title); ?></h3>
+                  <?php endif; ?>
+                  <?php if ($work_form): ?>
+                    <div class="team-modal__content contact-team-modal__content">
+                      <?php echo do_shortcode(shortcode_unautop($work_form)); ?>
+                    </div>
+                  <?php endif; ?>
+                </div>
+              </div>
+            </div>
+          <?php endif; ?>
 
-						<a class="footer-menu__link" href="<?php echo esc_url($link['url']); ?>" <?php echo $target; ?>>
-							<?php echo esc_html($label); ?>
-						</a>
+              <?php
+          $start_text  = get_field('start_project_button', 'footer_options');
+          $start_form  = get_field('start_project_form', 'footer_options', false);
+          $footer_start_id = 'footer-start-modal';
+          ?>
 
-					<?php endwhile; ?>
-				</div>
-			<?php endif; ?>
+            <?php if ($start_text): ?>
+            <button type="button"
+              class="footer-white-main-button"
+              data-modal="#<?php echo esc_attr($footer_start_id); ?>">
+              <span><?php echo esc_html($start_text); ?></span>
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 7H17V17" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+                <path d="M7 17L17 7" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <div id="<?php echo esc_attr($footer_start_id); ?>" class="team-modal-template contact-team-modal-template" hidden>
+              <div class="team-modal__inner">
+                <div class="team-modal__text">
+                  <h3 class="team-modal__title">Start a project</h3>
+                  <?php if ($start_form): ?>
+                    <div class="team-modal__content contact-team-modal__content">
+                      <?php echo do_shortcode(shortcode_unautop($start_form)); ?>
+                    </div>
+                  <?php endif; ?>
+                </div>
+              </div>
+            </div>
+          <?php endif; ?>
+
+        </div>
+                  </div>
+        <div class="footer-address">
+            <?php
+          $address_url  = get_field('address_url', 'footer_options');
+          $address  = get_field('address', 'footer_options');
+          $address_text = get_field('address_text', 'footer_options');
+          $copyright = get_field('copyright', 'footer_options');
+          ?>
+          <p class="footer-address-text">
+            <?php echo esc_html($address); ?>
+          </p>
+          <a href="<?php echo esc_url($address_url); ?>" class="footer-white-main-button">
+            <span><?php echo esc_html($address_text); ?></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 7H17V17" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+                <path d="M7 17L17 7" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+              </svg>
+          </a>
+        </div>
+        <span class="footer-copyright">
+         <?php echo esc_html($copyright); ?>
+        </span>
 		</div>
 
-		<?php if (have_rows('copyright_menu', 'footer_options')) : ?>
-			<div class="footer-copyright">
-				<?php while (have_rows('copyright_menu', 'footer_options')) : the_row();
-					$text = trim((string) get_sub_field('link_text'));
-					$url  = trim((string) get_sub_field('link_url'));
-
-					if ($text === '' && $url !== '') {
-						$text = preg_replace('#^https?://#i', '', $url);
-						$text = rtrim($text, '/');
-					}
-
-					if ($text === '' && $url === '') continue;
-				?>
-					<?php if ($url !== '') : ?>
-						<a class="footer-copyright__link" href="<?php echo esc_url($url); ?>">
-							<?php echo esc_html($text); ?>
-						</a>
-					<?php else : ?>
-						<span class="footer-copyright__text">
-							<?php echo esc_html($text); ?>
-						</span>
-					<?php endif; ?>
-
-				<?php endwhile; ?>
-			</div>
-		<?php endif; ?>
 	</div>
 	<div class="team-modal footer-modal" aria-hidden="true">
 		<div class="team-modal__overlay" data-close></div>
@@ -239,204 +156,7 @@
 		</div>
 	</div>
 
-</footer>
-
-<script>
-(function () {
-  const TAG='[IG center]';
-  const log=(...a)=>console.log(TAG, ...a);
-  const warn=(...a)=>console.warn(TAG, ...a);
-
-  function waitFor(cond, {timeout=12000, step=100}={}) {
-    return new Promise((resolve, reject)=>{
-      const t0=Date.now();
-      (function tick(){
-        if (cond()) return resolve(true);
-        if (Date.now()-t0>timeout) return reject(new Error('timeout'));
-        setTimeout(tick, step);
-      })();
-    });
-  }
-
-  // 2.3 слайда при items:2 → f=0.3 видимой части третьего
-  function calcStagePadding(containerEl, marginPx){
-    const W = (containerEl && containerEl.clientWidth) || window.innerWidth || 0;
-    const m = +marginPx || 0;
-    const f = 0.3;
-    return Math.max(0, Math.round((f/(2*(1+f))) * (W + m))); // ≈ 0.11538*(W+m)
-  }
-
-  function snapToCenter($owl, speed=0){
-    const inst = $owl.data('owl.carousel');
-    if (!inst || !inst.options.center) return;
-    const $act = $owl.find('.sbi-owl-item.active');
-    if (!$act.length) return;
-    const mid = Math.floor($act.length/2);
-    const idx = jQuery($act.get(mid)).index();
-    $owl.trigger('to.owl.carousel', [idx, speed, true]);
-  }
-
-  function applyOneSidePadding($owl, pad){
-    $owl.find('.sbi-owl-stage').css({ paddingLeft: '0px', paddingRight: pad + 'px' });
-  }
-  function resetStagePadding($owl){
-    $owl.find('.sbi-owl-stage').css({ paddingLeft:'0px', paddingRight:'0px' });
-  }
-
-  function bindDesktopHandlers($owl){
-    if ($owl.data('ig-bound-desktop')) return;
-    unbindMobileHandlers($owl);
-    $owl.data('ig-bound-desktop', 1);
-    let t=0;
-    $owl.on('changed.owl.carousel.igcenter', ()=>{
-      clearTimeout(t);
-      t = setTimeout(()=> snapToCenter($owl, 380), 16);
-    });
-    $owl.on('refreshed.owl.carousel.igcenter resized.owl.carousel.igcenter', ()=> snapToCenter($owl, 0));
-  }
-  function unbindDesktopHandlers($owl){
-    if (!$owl.data('ig-bound-desktop')) return;
-    $owl.off('.igcenter');
-    $owl.removeData('ig-bound-desktop');
-  }
-  function bindMobileHandlers($owl){
-    if ($owl.data('ig-bound-mobile')) return;
-    unbindDesktopHandlers($owl);
-    $owl.data('ig-bound-mobile', 1);
-    $owl.on('refreshed.owl.carousel.igmobile resized.owl.carousel.igmobile', ()=>{
-      const inst = $owl.data('owl.carousel');
-      const pad = inst ? inst.options.stagePadding || 0 : 0;
-      applyOneSidePadding($owl, pad);
-    });
-  }
-  function unbindMobileHandlers($owl){
-    if (!$owl.data('ig-bound-mobile')) return;
-    $owl.off('.igmobile');
-    $owl.removeData('ig-bound-mobile');
-  }
-
-  function applyMode(feed, {force=false}={}){
-    const $ = jQuery;
-    const $owl = $(feed);
-    const inst = $owl.data('owl.carousel');
-    if (!inst) return false;
-
-    if ($owl.data('ig-centering-inprogress')) return false;
-    $owl.data('ig-centering-inprogress', 1);
-
-    inst.options.smartSpeed    = inst.options.smartSpeed    ?? 450;
-    inst.options.dragEndSpeed  = inst.options.dragEndSpeed  ?? 420;
-    inst.options.autoplaySpeed = inst.options.autoplaySpeed ?? 450;
-
-    const margin = inst.options.margin || 0;
-    const mobile = window.innerWidth <= 600;
-    const prevMode = $owl.data('ig-mode');
-    if (!force && prevMode === (mobile ? 'm' : 'd')) {
-      $owl.data('ig-centering-inprogress', 0);
-      return true;
-    }
-
-    if (mobile) {
-      // ===== MOBILE =====
-      inst.options.center = false;
-      inst.options.slideBy = 1;
-      inst.options.autoplay = false;
-      inst.options.autoplayHoverPause = true;
-      inst.options.freeDrag = false;
-      inst.options.pullDrag = true;
-
-      inst.options.responsive = inst.options.responsive || {};
-      inst.options.responsive[0]   = Object.assign({}, inst.options.responsive[0],   { items:2, center:false, slideBy:1 });
-      inst.options.responsive[600] = Object.assign({}, inst.options.responsive[600], { center:true });
-
-      const pad = calcStagePadding(feed, margin);
-      if (inst.options.stagePadding !== pad) inst.options.stagePadding = pad;
-
-      $owl.trigger('refresh.owl.carousel');
-      applyOneSidePadding($owl, pad);
-
-      bindMobileHandlers($owl);
-    } else {
-      // ===== DESKTOP =====
-      inst.options.center = true;          // включаем центр
-      inst.options.stagePadding = 0;       // без паддингов
-      inst.options.slideBy = 1;
-
-      inst.options.responsive = inst.options.responsive || {};
-      inst.options.responsive[0]   = Object.assign({}, inst.options.responsive[0],   { items:2, center:false, slideBy:1 });
-      inst.options.responsive[600] = Object.assign({}, inst.options.responsive[600], { center:true });
-
-      // один refresh → затем снап, когда всё реально дорисовано
-      $owl.trigger('refresh.owl.carousel');
-      resetStagePadding($owl);
-
-      // ждём первую «переводку» и снапим (если событие не придёт — сделаем таймером)
-      const onceDesktopInit = ()=>{
-        snapToCenter($owl, 380);
-        $owl.off('translated.owl.carousel.iginitialize', onceDesktopInit);
-      };
-      $owl.on('translated.owl.carousel.iginitialize', onceDesktopInit);
-      setTimeout(()=> {
-        // резервный снап, если translated не сработал
-        snapToCenter($owl, 380);
-        $owl.off('translated.owl.carousel.iginitialize', onceDesktopInit);
-      }, 80);
-
-      bindDesktopHandlers($owl);
-    }
-
-    $owl.data('ig-mode', mobile ? 'm' : 'd');
-    $owl.data('ig-centering-inprogress', 0);
-    return true;
-  }
-
-  async function setupOn(node){
-    try { await waitFor(()=> window.jQuery && jQuery.fn && jQuery.fn.sbiOwlCarousel); }
-    catch(e){ warn('sbiOwlCarousel not ready'); return; }
-
-    const feeds = (node.querySelectorAll ? node.querySelectorAll('#sbi_images.sbi_carousel') : []);
-    if (!feeds.length) return;
-
-    for (const feed of feeds) {
-      try { await waitFor(()=> feed.classList.contains('sbi-owl-loaded'), {timeout: 8000}); } catch(e){}
-      applyMode(feed, {force:true});
-    }
-  }
-
-  // старт и отслеживание появления готового фида
-  setupOn(document);
-  const mo = new MutationObserver(muts=>{
-    for (const m of muts){
-      if (m.type !== 'childList') continue;
-      m.addedNodes.forEach(node=>{
-        if (!(node instanceof Element)) return;
-        if (node.matches && node.matches('#sbi_images.sbi_carousel.sbi-owl-loaded')) {
-          setupOn(node.parentNode || document);
-        } else {
-          const inner = node.querySelector && node.querySelector('#sbi_images.sbi_carousel.sbi-owl-loaded');
-          if (inner) setupOn(node);
-        }
-      });
-    }
-  });
-  mo.observe(document.body, {subtree:true, childList:true});
-
-  // переключение режимов только при реальном resize
-  (function bindResize(){
-    let raf = 0;
-    window.addEventListener('resize', ()=>{
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(()=>{
-        document.querySelectorAll('#sbi_images.sbi_carousel.sbi-owl-loaded')
-          .forEach(el => applyMode(el));
-      });
-    });
-  })();
-
-  log('ready');
-})();
-</script>
-
+</footer> 
 
 <script>
 /**

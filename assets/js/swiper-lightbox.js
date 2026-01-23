@@ -1,8 +1,31 @@
-
 (function () {
-  function $all(sel, ctx) {
-    return Array.prototype.slice.call((ctx || document).querySelectorAll(sel));
+  function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  // --- NEW: scroll lock helpers ---
+  var _scrollY = 0;
+  function lockScroll() {
+    _scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.documentElement.classList.add('plb-locked');
+    document.body.classList.add('plb-locked');
+    // iOS надёжный способ
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-_scrollY) + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    // если нужен компенсационный паддинг под скроллбар — добавьте здесь
   }
+  function unlockScroll() {
+    document.documentElement.classList.remove('plb-locked');
+    document.body.classList.remove('plb-locked');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, _scrollY || 0);
+  }
+  // --------------------------------
 
   function ensureOverlay() {
     var ex = document.querySelector(".plb-overlay");
@@ -53,11 +76,7 @@
     });
     itemsCache = uniq.map(function (a) {
       var img = a.querySelector("img");
-      return {
-        key:  getKey(a),
-        href: a.getAttribute("href"),
-        alt:  img ? (img.getAttribute("alt") || "") : ""
-      };
+      return { key: getKey(a), href: a.getAttribute("href"), alt: img ? (img.getAttribute("alt") || "") : "" };
     });
     return uniq;
   }
@@ -87,15 +106,12 @@
 
     totalEl.textContent = String(count);
 
-    if (swiper) {
-      swiper.destroy(true, true);
-      swiper = null;
-    }
+    if (swiper) { swiper.destroy(true, true); swiper = null; }
 
-    var needsFix = true;
+    var userInteracted = false; 
 
     swiper = new Swiper(".plb-swiper", {
-      initialSlide: 0,
+      initialSlide: 0, 
       centeredSlides: true,
       slidesPerView: "auto",
       spaceBetween: 20,
@@ -113,35 +129,39 @@
         init: function (sw) {
           sw.slideToLoop(startIndex, 0, false);
           curEl.textContent = String((sw.realIndex || 0) + 1);
+
           var imgs = overlay.querySelectorAll(".plb-slide-img");
           Array.prototype.forEach.call(imgs, function (img) {
             if (img.complete) return;
-            img.addEventListener("load", function () { sw.update(); if (needsFix) sw.slideToLoop(startIndex, 0, false); }, { once: true });
+            img.addEventListener("load", function () {
+              if (!userInteracted) sw.update();
+            }, { once: true });
           });
-          setTimeout(function(){ sw.update(); if (needsFix) sw.slideToLoop(startIndex, 0, false); }, 0);
+
+          setTimeout(function () {
+            if (!userInteracted) sw.update();
+          }, 0);
         },
         imagesReady: function (sw) {
           sw.update();
-          if (needsFix) sw.slideToLoop(startIndex, 0, false);
-          needsFix = false;
         },
         slideChange: function (sw) {
+          userInteracted = true; 
           curEl.textContent = String((sw.realIndex || 0) + 1);
         }
       }
     });
 
     overlay.classList.add("is-open");
-    document.documentElement.style.overflow = "hidden";
+    lockScroll();
   }
+
 
   function close() {
     overlay.classList.remove("is-open");
-    if (swiper) {
-      swiper.destroy(true, true);
-      swiper = null;
-    }
-    document.documentElement.style.overflow = "";
+    if (swiper) { swiper.destroy(true, true); swiper = null; }
+    // --- NEW: unlock ---
+    unlockScroll();
   }
 
   btnClose.addEventListener("click", close);
@@ -174,4 +194,11 @@
     if (e.target.closest(".plb-swiper, .plb-bottombar")) return;
     close();
   });
+
+  // --- NEW: prevent background scroll on iOS via touchmove outside swiper ---
+  overlay.addEventListener('touchmove', function(e){
+    if (!e.target.closest('.plb-swiper')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 })();

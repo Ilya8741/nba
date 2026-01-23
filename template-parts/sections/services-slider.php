@@ -9,11 +9,13 @@
           <?php foreach ($rows as $i => $row):
             $title = $row['title'] ?? '';
             $text  = $row['text']  ?? '';
+            $content  = $row['content']  ?? '';
             $btn   = (isset($row['button']) && is_array($row['button'])) ? $row['button'] : null;
             $btn_url   = $btn['url']   ?? '';
             $btn_title = $btn['title'] ?? '';
             $btn_tgt   = $btn['target'] ?? '_self';
-            $img       = $row['image'] ?? null;
+            $img       = $row['image1'] ?? null;
+            $img2       = $row['image2'] ?? null;
           ?>
            <article class="service-card" style="--z: <?php echo 1 + (int)$i; ?>">
               <div class="service-card__grid">
@@ -24,22 +26,35 @@
                   <?php if ($text): ?>
                     <p class="ssc-text"><?php echo esc_html($text); ?></p>
                   <?php endif; ?>
+                  <?php if ($content): ?>
+                    <p class="ssc-content"><?php echo esc_html($content); ?></p>
+                  <?php endif; ?>
                   <?php if ($btn_url && $btn_title): ?>
-                    <a class="ssc-btn main-button" href="<?php echo esc_url($btn_url); ?>" target="<?php echo esc_attr($btn_tgt); ?>">
+                    <a class="ssc-btn main-link" href="<?php echo esc_url($btn_url); ?>" target="<?php echo esc_attr($btn_tgt); ?>">
                       <span><?php echo esc_html($btn_title); ?></span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <path d="M1 1H13V13" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
-                        <path d="M1 13L13 1" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
-                      </svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round"/>
+                      <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round"/>
+                    </svg>
                     </a>
                   <?php endif; ?>
                 </div>
 
-                <figure class="service-card__media" aria-hidden="true">
+                <figure class="service-card__media <?php echo (!empty($img2['ID']) ? ' service-card__media-duo' : ''); ?>" aria-hidden="true">
                   <?php
                   if (!empty($img['ID'])) {
                     echo wp_get_attachment_image(
                       (int)$img['ID'],
+                      '1536x1536',
+                      false,
+                      ['loading' => 'eager', 'decoding' => 'async']
+                    );
+                  }
+                  ?>
+                   <?php
+                  if (!empty($img2['ID'])) {
+                    echo wp_get_attachment_image(
+                      (int)$img2['ID'],
                       '1536x1536',
                       false,
                       ['loading' => 'eager', 'decoding' => 'async']

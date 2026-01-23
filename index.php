@@ -2,7 +2,7 @@
 /**
  * The main template file
  *
- * @package project-london
+ * @package nba
  */
 
 get_header();

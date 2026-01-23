@@ -1,51 +1,99 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//   const overlay = document.getElementById("pl-overlay");
-//   if (!overlay) return;
-
-//   const dur = parseInt(overlay.dataset.duration || "3000", 10);
-
-//   overlay.style.setProperty("--pl-dur", dur + "ms");
-
-//   setTimeout(() => {
-//     overlay.classList.add("is-done");
-//     document.documentElement.classList.remove("pl-lock");
-//     document.body.classList.remove("pl-lock");
-//     setTimeout(() => overlay.remove(), 550);
-//   }, dur);
-
-//   document.body.classList.add("pl-lock");
-// });
-
 document.addEventListener("DOMContentLoaded", function () {
-  const links = document.querySelectorAll(".hb-menu__link[data-img-id]");
-  const imgs = document.querySelectorAll(".hb-media__img");
-  const list = document.querySelector(".hb-menu__list");
+  const menu = document.querySelector(".hb-menu");
+  const wrapper = document.querySelector(".hb-menu-with-img");
+  if (!menu || !wrapper) return;
 
-  if (!links.length || !list) return;
+  const mqDesktop = window.matchMedia("(min-width: 993px)");
 
-  function showById(id) {
-    imgs.forEach((img) => img.classList.toggle("is-active", img.id === id));
-  }
+  const list = menu.querySelector(".hb-menu__list");
+  const links = menu.querySelectorAll(".hb-menu__link[data-submenu-id]");
+  const desktopPanels = document.querySelectorAll(".hb-right .hb-submenu-panel");
+  const mobilePanels = document.querySelectorAll(".hb-submenu-panel--mobile");
 
-  function activate(link, id) {
-    showById(id);
-    list.classList.add("dim");
-    links.forEach((l) => l.classList.toggle("is-current", l === link));
-  }
-
-  function reset() {
+  function closeAll() {
     list.classList.remove("dim");
-    links.forEach((l) => l.classList.remove("is-current"));
+    menu.classList.remove("is-submenu-active");
+
+    links.forEach((l) => {
+      l.classList.remove("is-current");
+      l.setAttribute("aria-expanded", "false");
+    });
+
+    desktopPanels.forEach((p) => p.classList.remove("is-active"));
+    mobilePanels.forEach((p) => p.classList.remove("is-active"));
   }
 
+  function openDesktop(link, id) {
+    closeAll();
+    menu.classList.add("is-submenu-active");
+    list.classList.add("dim");
+
+    link.classList.add("is-current");
+    link.setAttribute("aria-expanded", "true");
+
+    const panel = document.getElementById(id);
+    if (panel) panel.classList.add("is-active");
+  }
+
+  function openMobile(link, id) {
+    closeAll();
+    menu.classList.add("is-submenu-active");
+    list.classList.add("dim");
+
+    link.classList.add("is-current");
+    link.setAttribute("aria-expanded", "true");
+
+    const panel = document.getElementById(id + "-mobile");
+    if (panel) panel.classList.add("is-active");
+  }
+
+  /* ---------- DESKTOP ---------- */
   links.forEach((link) => {
-    const id = link.getAttribute("data-img-id");
-    link.addEventListener("mouseenter", () => activate(link, id));
-    link.addEventListener("focus", () => activate(link, id));
-    link.addEventListener("mouseleave", reset);
-    link.addEventListener("blur", reset);
+    const id = link.dataset.submenuId;
+
+    link.addEventListener("mouseenter", () => {
+      if (!mqDesktop.matches) return;
+      openDesktop(link, id);
+    });
+
+    link.addEventListener("focus", () => {
+      if (!mqDesktop.matches) return;
+      openDesktop(link, id);
+    });
   });
+
+  menu.addEventListener("mouseleave", () => {
+    if (!mqDesktop.matches) return;
+    closeAll();
+  });
+
+  /* ---------- MOBILE (ВАЖНО) ---------- */
+  wrapper.addEventListener("click", (e) => {
+    const back = e.target.closest("[data-back]");
+    if (back) {
+      e.preventDefault();
+
+      const panel = back.closest(".hb-submenu-panel--mobile");
+      if (panel) {
+        panel.classList.remove("is-active");
+      }
+
+      closeAll();
+      return;
+    }
+
+    const link = e.target.closest(".hb-menu__link[data-open-submenu]");
+    if (!link) return;
+
+    if (!mqDesktop.matches) {
+      e.preventDefault();
+      openMobile(link, link.dataset.openSubmenu);
+    }
+  });
+
+  window.addEventListener("resize", closeAll);
 });
+
 
 // assets/js/burger.js
 document.addEventListener("DOMContentLoaded", () => {

@@ -3,60 +3,11 @@
 /**
  * OUR TEAM section (ACF Repeater: our_team_repeater)
  * Subfields: image (Image), name (Text), job_title (Text), content (WYSIWYG),
- *            linkedin_url (URL), linkedin_text (Text)
  */
 ?>
 
 <section class="team-section" id="team-section">
     <div class="team-section-wrapper">
-        <div class="team-section-header">
-            <div class="team-section-header-left" data-aos="fade-right" data-aos-offset="200">
-                <span class="team-section-subtitle">
-                    <?php the_sub_field('subtitle'); ?>
-                </span>
-                <h2 class="team-section-title">
-                    <?php the_sub_field('title'); ?>
-                </h2>
-            </div>
-
-            <?php
-            $header_btn_text   = get_sub_field('button_text');          // текст кнопки
-            $header_popup_title = get_sub_field('popup_title');          // заголовок в модалке
-            $header_form_raw   = get_sub_field('contact_form', false, false); // WYSIWYG с шорткодом
-            $header_tpl_id     = 'team-contact-modal';
-            ?>
-
-            <?php if ($header_btn_text): ?>
-                <button type="button"
-                    class="team-section-button main-button"
-                    data-aos="fade-left"
-                    data-aos-offset="200"
-                    data-modal="#<?php echo esc_attr($header_tpl_id); ?>">
-                    <span><?php echo esc_html($header_btn_text); ?></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <path d="M1 1H13V13" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
-                        <path d="M1 13L13 1" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
-                    </svg>
-                </button>
-
-                <div id="<?php echo esc_attr($header_tpl_id); ?>" class="team-modal-template contact-team-modal-template" hidden>
-                    <div class="team-modal__inner">
-                        <div class="team-modal__text">
-                            <?php if ($header_popup_title): ?>
-                                <h3 class="team-modal__title"><?php echo esc_html($header_popup_title); ?></h3>
-                            <?php endif; ?>
-
-                            <?php if ($header_form_raw): ?>
-                                <div class="team-modal__content contact-team-modal__content">
-                                    <?php echo do_shortcode(shortcode_unautop($header_form_raw)); ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
-
         <div class="team-grid">
             <?php if (have_rows('our_team_repeater')): ?>
                 <?php $i = 0;
@@ -66,12 +17,10 @@
                     $name         = get_sub_field('name');
                     $job          = get_sub_field('job_title');
                     $content      = get_sub_field('content');
-                    $linkedin_url = get_sub_field('linkedin_url');
-                    $linkedin_txt = get_sub_field('linkedin_text');
                     $tpl_id       = 'team-modal-' . $i;
                 ?>
                     <button class="team-card" data-aos="fade-up" data-aos-offset="200" type="button" data-modal="#<?php echo esc_attr($tpl_id); ?>">
-                        <span class="team-card__image team-card__image-grid-item">
+                        <div class="team-card__image team-card__image-grid-item">
                             <?php
                             if ($img) {
                                 echo wp_get_attachment_image($img['ID'], 'large', false, [
@@ -79,13 +28,7 @@
                                 ]);
                             }
                             ?>
-                            <span class="team-card__open" aria-hidden="true">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                    <path d="M0.771484 1H17.2286V17" stroke="white" stroke-width="1.10345" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M0.771484 17L17.2286 1" stroke="white" stroke-width="1.10345" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </span>
+                        </div>
                         <span class="team-card__meta">
                             <?php if ($name): ?><span class="team-card__name"><?php echo esc_html($name); ?></span><?php endif; ?>
                             <?php if ($job):  ?><span class="team-card__job"><?php echo esc_html($job); ?></span><?php endif; ?>
@@ -107,15 +50,6 @@
                                 <?php if ($name): ?><h3 class="team-modal__title"><?php echo esc_html($name); ?></h3><?php endif; ?>
                                 <?php if ($job):  ?><div class="team-modal__subtitle"><?php echo esc_html($job); ?></div><?php endif; ?>
                                 <?php if ($content): ?><div class="team-modal__content"><?php echo wp_kses_post($content); ?></div><?php endif; ?>
-                                <?php if ($linkedin_url && $linkedin_txt): ?>
-                                    <a class="team-modal__link main-button" href="<?php echo esc_url($linkedin_url); ?>" target="_blank" rel="noopener">
-                                        <?php echo esc_html($linkedin_txt ?: 'Connect on LinkedIn'); ?>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none" aria-hidden="true">
-                                            <path d="M1.43945 1H17.8966V17" stroke="white" stroke-width="1.10345" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M1.43945 17L17.8966 1" stroke="white" stroke-width="1.10345" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </a>
-                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -128,10 +62,11 @@
         <div class="team-modal__overlay" data-close></div>
         <div class="team-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="team-modal-title">
             <button class="team-modal__close" type="button" data-close aria-label="Close">
-                <span aria-hidden="true" class="team-modal__close-button">
-                    <div class="team-modal__close-line"></div>
-                    <div class="team-modal__close-line"></div>
-                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M2.63672 16.3643L15.3646 3.63634" stroke="white" stroke-linejoin="round" />
+                    <path d="M2.63672 3.63574L15.3646 16.3637" stroke="white" stroke-linejoin="round" />
+                </svg>
+                <span>Close</span>
             </button>
             <div class="team-modal__mount"></div>
         </div>

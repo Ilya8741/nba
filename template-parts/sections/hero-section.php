@@ -1,165 +1,46 @@
-<div class="hero-section <?php if (get_sub_field('no_home')): ?> hero-section-no-home <?php endif; ?>">
+<div class="hero-section" data-theme="dark">
+  <div class="hero-section-images">
+  <?php $image1 = get_sub_field('image1'); ?>
+  <?php if ($image1): ?>
+    <img src="<?php echo esc_url($image1['url']); ?>" class="hero-section-image hero-section-image-left" alt="<?php echo esc_attr($image1['alt']); ?>">
+  <?php endif; ?>
+  <?php $image2 = get_sub_field('image2'); ?>
+  <?php if ($image2): ?>
+    <img src="<?php echo esc_url($image2['url']); ?>" class="hero-section-image hero-section-image-right" alt="<?php echo esc_attr($image2['alt']); ?>">
+  <?php endif; ?>
+  </div>
+
   <div class="hero-section-wrapper">
-    <div class="main-container">
-      <h1 class="hero-section-title">
-        <?php the_sub_field('hero_title'); ?>
-      </h1>
+    <div class="hero-section-wrapper-anim" data-aos="fade-up" data-aos-offset="0">
+    <div class="hero-section-title">
+        <?php
+        $hero_title = get_sub_field('hero_title');
+        if ($hero_title) {
+          echo apply_filters('the_content', $hero_title);
+        }
+        ?>
     </div>
 
-    <div class="hero-section-image-wrapper">
-      <?php
-      $hero_video       = get_sub_field('hero_video'); 
-      $hero_video_main  = get_sub_field('hero_video_main'); 
-
-      $hero_main_url  = is_array($hero_video_main) ? ($hero_video_main['url'] ?? '') : (is_string($hero_video_main) ? $hero_video_main : '');
-      $hero_main_type = is_array($hero_video_main) ? ($hero_video_main['mime_type'] ?? '') : '';
-      ?>
-
-      <?php if ($hero_video): ?>
-        <video autoplay muted loop playsinline>
-          <source src="<?php echo esc_url($hero_video['url']); ?>" type="<?php echo esc_attr($hero_video['mime_type']); ?>">
-        </video>
-      <?php endif; ?>
-
-      <?php if (get_sub_field('hero_button_text')): ?>
-        <button
-          class="hero-section-button main-button"
-          <?php if ($hero_main_url): ?>
-            data-fs-src="<?php echo esc_url($hero_main_url); ?>"
-            <?php if ($hero_main_type): ?>data-fs-type="<?php echo esc_attr($hero_main_type); ?>"<?php endif; ?>
-          <?php endif; ?>
-        >
-          <span><?php the_sub_field('hero_button_text'); ?></span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false">
-            <path d="M1 1H13V13" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-            <path d="M1 13L13 1" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-          </svg>
-        </button>
-      <?php endif; ?>
+    <svg xmlns="http://www.w3.org/2000/svg" width="114" height="118" viewBox="0 0 114 118" fill="none" class="hero-section-svg">
+      <path d="M0 30.3536V84.2461H6.08176V33.6822L57.0812 6.58575L107.923 34.5597V88.7193L114 84.909V31.2835L57.132 0L0 30.3536Z" fill="#E8E8E8" />
+      <path d="M102.762 91.9319V37.3621L57.0288 12.5537L11.2852 37.1571V84.2758H17.3482V40.4703L57.0187 19.1372L96.6993 40.6609V95.7456L102.762 91.9319Z" fill="#E8E8E8" />
+      <path d="M29.0274 46.3143L57.1141 30.8781L85.221 46.5V102.96L91.2796 99.1506V43.248L57.1343 24.2646L22.9688 43.0385V84.2477H29.0274V46.3143Z" fill="#E8E8E8" />
+      <path d="M40.4686 52.2098L56.9965 43.1984L73.7827 52.591V109.986L79.8439 106.173V49.341L57.0371 36.584L34.4023 48.9217V84.1286H40.4686V52.2098Z" fill="#E8E8E8" />
+      <path d="M51.4936 59.2369L57.121 56.0343L62.7485 59.2369V117.012L68.8057 113.205V56.0247L57.121 49.3721L45.4414 56.0247V84.2106H51.4936V59.2369Z" fill="#E8E8E8" />
+    </svg>
+    <div class="hero-section-content">
+      <div class="hero-section-text">
+        <?php the_sub_field('hero_text'); ?>
+      </div>
+      <div class="hero-section-subtitle">
+        <?php
+        $hero_subtitle = get_sub_field('hero_subtitle');
+        if ($hero_subtitle) {
+          echo apply_filters('the_content', $hero_subtitle);
+        }
+        ?>
+      </div>
     </div>
+     </div>
   </div>
 </div>
-
-<script>
-(function () {
-  var wrapper = document.querySelector('.hero-section-image-wrapper');
-  if (!wrapper) return;
-
-  var trigger = document.querySelector('.hero-section-button');
-  var inlineVideo = wrapper.querySelector('video');
-  if (!trigger) return;
-
-  function getVideoSrc(v) {
-    if (!v) return '';
-    var s = v.querySelector('source');
-    return (s && s.src) || v.currentSrc || v.src || '';
-  }
-
-  function openFullscreenVideo(url, type) {
-    if (!url) return;
-
-    var overlay = document.createElement('div');
-    Object.assign(overlay.style, {
-      position: 'fixed',
-      inset: '0',
-      background: '#000',
-      zIndex: '2147483647',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      transform: 'translateY(-10vh)',
-      opacity: '0',
-      transition: 'transform 1.5s ease, opacity 1.5s ease',
-      willChange: 'transform, opacity'
-    });
-
-    var v = document.createElement('video');
-    if (type) {
-      var srcEl = document.createElement('source');
-      srcEl.src = url;
-      srcEl.type = type;
-      v.appendChild(srcEl);
-    } else {
-      v.src = url;
-    }
-    v.controls = true;
-    v.autoplay = true;
-    v.muted = false;
-    v.playsInline = true;
-    v.preload = 'auto';
-    Object.assign(v.style, {
-      width: '100%',
-      height: '100%',
-      objectFit: 'contain',
-      visibility: 'hidden'
-    });
-
-    var showVideoOnce = function () {
-      v.style.visibility = 'visible';
-      v.removeEventListener('loadeddata', showVideoOnce);
-      v.removeEventListener('canplay', showVideoOnce);
-    };
-    v.addEventListener('loadeddata', showVideoOnce);
-    v.addEventListener('canplay', showVideoOnce);
-
-    overlay.appendChild(v);
-    document.body.appendChild(overlay);
-
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        overlay.style.transform = 'translateY(0)';
-        overlay.style.opacity = '1';
-      });
-    });
-
-    var wentFullscreen = false;
-    function requestFS() {
-      if (wentFullscreen) return;
-      wentFullscreen = true;
-      var reqFS = v.requestFullscreen || v.webkitRequestFullscreen || v.msRequestFullscreen;
-      if (reqFS) {
-        try { reqFS.call(v); } catch (e) {}
-      } else if (v.webkitEnterFullscreen) {
-        try { v.webkitEnterFullscreen(); } catch (e) {}
-      }
-    }
-    overlay.addEventListener('transitionend', function (e) {
-      if (e.propertyName === 'opacity' || e.propertyName === 'transform') {
-        requestFS();
-      }
-    }, { once: true });
-
-    function cleanup() {
-      try { v.pause(); } catch(e){}
-      overlay.remove();
-      document.removeEventListener('keydown', onEsc);
-      document.removeEventListener('webkitfullscreenchange', onFsChange, true);
-      document.removeEventListener('fullscreenchange', onFsChange, true);
-    }
-    function onEsc(e) {
-      if (e.key === 'Escape') {
-        if (document.fullscreenElement) document.exitFullscreen().catch(function(){});
-        else cleanup();
-      }
-    }
-    function onFsChange() {
-      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        cleanup();
-      }
-    }
-    document.addEventListener('keydown', onEsc);
-    document.addEventListener('fullscreenchange', onFsChange, true);
-    document.addEventListener('webkitfullscreenchange', onFsChange, true);
-
-    v.play().catch(function(){});
-  }
-
-  trigger.addEventListener('click', function(e){
-    e.preventDefault();
-    var fsUrl  = trigger.getAttribute('data-fs-src') || '';
-    var fsType = trigger.getAttribute('data-fs-type') || '';
-    if (!fsUrl) fsUrl = getVideoSrc(inlineVideo);
-    openFullscreenVideo(fsUrl, fsType);
-  });
-})();
-</script>

@@ -40,6 +40,20 @@ $slides_count = is_array($slides) ? count($slides) : 0;
             </div>
         </div>
     </div>
+     <div class="process-slider-nav testimonials-slider-nav">
+            <div class="testimonials-slider-prev process-slider-nav-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M8.73535 17.1475L0.250071 8.66218L8.73535 0.176898" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
+                    <path d="M17.2206 8.66218L0.250071 8.66218" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="testimonials-slider-next process-slider-nav-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M8.48535 0.176758L16.9706 8.66204L8.48535 17.1473" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
+                    <path d="M7.03335e-05 8.66204H16.9706" stroke="#717171" stroke-width="0.5" stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
 </div>
 
 
@@ -53,13 +67,16 @@ $slides_count = is_array($slides) ? count($slides) : 0;
 
         new Swiper(el, {
             loop: !onlyTwo,
-            slidesPerView: 1.05,
+            slidesPerView: 1,
             spaceBetween: 8,
             watchOverflow: true,
-
+            navigation: {
+                    nextEl: '.testimonials-slider-next',
+                    prevEl: '.testimonials-slider-prev',
+            },
             breakpoints: {
                 768: {
-                    slidesPerView: 2.1,
+                    slidesPerView: 2,
                     spaceBetween: 20
                 },
                 992: {

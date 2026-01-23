@@ -1,154 +1,56 @@
-<div class="quote-section <?php if (get_sub_field('spacing')): ?>spacing<?php endif; ?> <?php if (get_sub_field('top_none_spacing')): ?> quote-section-top-none-spacing <?php endif; ?> <?php if (get_sub_field('medium_width')): ?> quote-medium-width<?php endif; ?>  <?php if (get_sub_field('large_title')): ?> quote-large-title<?php endif; ?>" data-aos="fade-right">
-    <div class="quote-wrapper main-container">
-        <?php if (get_sub_field('quote_subtitle')): ?>
-            <span class="quote-subtitle">
-                <?php the_sub_field('quote_subtitle'); ?>
-            </span>
-        <?php endif; ?>
+<?php
+$link = get_sub_field('link');
+$has_link = ($link && is_array($link) && !empty($link['url']));
+?>
 
-        <h2 class="quote-title">
-            <?php the_sub_field('quote_title'); ?>
-        </h2>
 
-        <?php if (get_sub_field('quote_text')): ?>
-            <span class="quote-text">
-                <?php the_sub_field('quote_text'); ?>
-            </span>
-        <?php endif; ?>
-
-        <?php
-        $q_btn_text = get_sub_field('quote_button_text');
-        $q_btn_url  = get_sub_field('quote_button_url');
-        $q_form_raw = get_sub_field('contact_form', false, false);
-        $q_popup_title = get_sub_field('popup_title');
-        $q_tpl_id = 'quote-contact-modal-' . uniqid();
-        ?>
-
-        <?php if ($q_btn_text): ?>
-            <?php if ($q_form_raw): ?>
-                <button type="button"
-                        class="quote-button main-button"
-                        data-modal="#<?php echo esc_attr($q_tpl_id); ?>" data-modal-local>
-                    <span><?php echo esc_html($q_btn_text); ?></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <path d="M1 1H13V13" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-                        <path d="M1 13L13 1" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-                    </svg>
-                </button>
-
-                <div id="<?php echo esc_attr($q_tpl_id); ?>" class="team-modal-template contact-team-modal-template" hidden>
-                    <div class="team-modal__inner">
-                        <div class="team-modal__text">
-                            <?php if ($q_popup_title): ?>
-                                <h3 class="team-modal__title"><?php echo esc_html($q_popup_title); ?></h3>
-                            <?php endif; ?>
-                            <div class="team-modal__content contact-team-modal__content">
-                                <?php echo do_shortcode( shortcode_unautop( $q_form_raw ) ); ?>
-                            </div>
-                        </div>
-                    </div>
+<div class="quote-right <?php if (get_sub_field('white_background')): ?> quote-right-white <?php endif; ?>">
+    <div class="quote-right-container">
+        <div class="quote-right-wrapper <?php echo $has_link ? ' quote-right-wrapper-with-link' : ''; ?>" data-aos="fade-right" data-aos-duration="600">
+            <div class="quote-right-content">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14" fill="none">
+                    <path opacity="0.25" d="M0 13.0883V9.34353C0 8.26661 0.247854 7.14685 0.743562 5.98427C1.25429 4.80944 1.94528 3.70192 2.81652 2.66171C3.70279 1.60927 4.69421 0.722029 5.79077 0L9.57618 2.00087C8.68991 3.09003 7.94635 4.22815 7.34549 5.41521C6.75966 6.59004 6.47425 7.88724 6.48927 9.30682V13.0883H0ZM11.4238 13.0883V9.34353C11.4238 8.26661 11.6717 7.14685 12.1674 5.98427C12.6781 4.80944 13.3691 3.70192 14.2403 2.66171C15.1266 1.60927 16.118 0.722029 17.2146 0L21 2.00087C20.1137 3.09003 19.3702 4.22815 18.7693 5.41521C18.1835 6.59004 17.8981 7.88724 17.9131 9.30682V13.0883H11.4238Z" fill="#221F1C" />
+                </svg>
+                <div class="quote-right-title">
+                    <?php
+                    $item1_text = get_sub_field('quote_title');
+                    if ($item1_text) {
+                        echo apply_filters('the_content', $item1_text);
+                    }
+                    ?>
                 </div>
-            <?php else: ?>
-                <a href="<?php echo esc_url($q_btn_url); ?>" class="quote-button main-button">
-                    <span><?php echo esc_html($q_btn_text); ?></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M1 1H13V13" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
-                        <path d="M1 13L13 1" stroke="#2B2B2B" stroke-width="0.5" stroke-linejoin="round" />
+                <div class="quote-right-text">
+                    <?php
+                    $item2_text = get_sub_field('quote_text');
+                    if ($item2_text) {
+                        echo apply_filters('the_content', $item2_text);
+                    }
+                    ?>
+                </div>
+            </div>
+                <?php
+                $link = get_sub_field('link');
+
+                if ($link && is_array($link)) :
+                $url    = $link['url'] ?? '';
+                $title  = $link['title'] ?? '';
+                $target = $link['target'] ?? '_self';
+
+                if ($url) :
+                ?>
+                <a href="<?php echo esc_url($url); ?>"
+                    class="main-button quote-right-button"
+                    target="<?php echo esc_attr($target); ?>">
+                    <span><?php echo esc_html($title); ?></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round"/>
+                        <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round"/>
                     </svg>
                 </a>
-            <?php endif; ?>
-        <?php endif; ?>
-    </div>
-      <div class="team-modal quote-modal" aria-hidden="true">
-        <div class="team-modal__overlay" data-close></div>
-        <div class="team-modal__dialog" role="dialog" aria-modal="true">
-            <button class="team-modal__close" type="button" data-close aria-label="Close">
-                <span aria-hidden="true" class="team-modal__close-button">
-                    <div class="team-modal__close-line"></div>
-                    <div class="team-modal__close-line"></div>
-                </span>
-            </button>
-            <div class="team-modal__mount"></div>
+                <?php
+                endif;
+                endif;
+                ?>
         </div>
     </div>
 </div>
-
-<script>
-(function() {
-  const root = document.currentScript.closest('.quote-section') || document.querySelector('.quote-section');
-  if (!root || root.dataset.modalInit === '1') return;
-  root.dataset.modalInit = '1';
-
-  const modal = root.querySelector('.quote-modal');
-  const mount = modal.querySelector('.team-modal__mount');
-  const overlay = modal.querySelector('.team-modal__overlay');
-  const closeBtns = modal.querySelectorAll('[data-close]');
-  const html = document.documentElement;
-
-  // --- перемещение модалки в конец body
-  document.body.appendChild(modal);
-
-  function lockScroll() {
-    const c = +(html.dataset.plLock || 0) + 1;
-    html.dataset.plLock = c;
-    html.classList.add('is-locked');
-  }
-
-  function unlockScroll() {
-    const c = Math.max(+(html.dataset.plLock || 0) - 1, 0);
-    html.dataset.plLock = c;
-    if (!c) html.classList.remove('is-locked');
-  }
-
-  function openModalFromTemplate(selector) {
-    const tpl = root.querySelector(selector);
-    if (!tpl) return;
-    mount.innerHTML = tpl.innerHTML;
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    lockScroll();
-    trapFocus(modal);
-    document.dispatchEvent(new CustomEvent('team-modal:mounted', { detail: { mount } }));
-  }
-
-  function closeModal() {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    unlockScroll();
-    mount.innerHTML = '';
-    releaseFocus();
-  }
-
-  root.addEventListener('click', function(e) {
-    const btn = e.target.closest('[data-modal]');
-    if (!btn) return;
-    e.preventDefault();
-    const sel = btn.getAttribute('data-modal');
-    if (sel) openModalFromTemplate(sel);
-  });
-
-  closeBtns.forEach(b => b.addEventListener('click', closeModal));
-  overlay.addEventListener('click', closeModal);
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-  });
-
-  let lastFocused = null;
-  function trapFocus(container) {
-    lastFocused = document.activeElement;
-    const focusables = container.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
-    if (focusables.length) focusables[0].focus();
-    container.addEventListener('keydown', onTab);
-    function onTab(e) {
-      if (e.key !== 'Tab') return;
-      const list = Array.from(focusables).filter(el => !el.hasAttribute('disabled'));
-      if (!list.length) return;
-      const first = list[0], last = list[list.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  }
-  function releaseFocus() { if (lastFocused) lastFocused.focus(); }
-})();
-
-</script>
