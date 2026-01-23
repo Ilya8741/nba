@@ -1324,13 +1324,6 @@ html {
   padding-bottom: 200px;
 }
 
-/* Parallax items */
-.grid-section-item {
-  will-change: transform, opacity;
-  transform: translate3d(0, 100px, 0);
-  opacity: 0;
-  transition: opacity 0.6s linear;
-}
 
 @media (max-width: 1200px) {
   .grid-section-wrapper-top-duo.grid-section-wrapper-top {
@@ -3608,13 +3601,11 @@ html.is-locked {
   background: #f7f7f7;
 }
 
-/* спойлер остаётся внизу правой колонки */
 .article-spoiler {
   position: relative;
   align-self: end;
 }
 
-/* панель спойлера (как у тебя) */
 .article-spoiler__panel {
   position: absolute;
   left: 0;

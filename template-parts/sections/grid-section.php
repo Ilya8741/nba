@@ -4,7 +4,9 @@
     <div class="grid-section-wrapper">
         <div class="grid-section-wrapper-top <?php if (!$image3): ?> grid-section-wrapper-top-duo <?php endif; ?>">
             <!-- Item 1 -->
-            <div class="grid-section-item grid-section-item-1">
+            <div class="grid-section-item grid-section-item-1" data-aos="fade-right" data-aos-duration="1000"
+                data-aos-delay="100"
+                data-aos-easing="ease-out">
                 <a href="<?php the_sub_field('item1_link'); ?>" class="grid-section-link">
                     <div class="grid-section-image-wrapper">
                         <?php $image1 = get_sub_field('item1_image'); ?>
@@ -61,7 +63,9 @@
             <!-- Item 2 -->
              <?php if (!$image3): ?><div class="grid-section-item-wrap"><?php endif; ?>
                  <?php if (!$image3): ?><div></div><?php endif; ?>
-                <div class="grid-section-item grid-section-item-2">
+                <div class="grid-section-item grid-section-item-2" data-aos="fade-left" data-aos-duration="1000"
+                    data-aos-delay="100"
+                    data-aos-easing="ease-out">
                     <a href="<?php the_sub_field('item2_link'); ?>" class="grid-section-link">
                         <div class="grid-section-image-wrapper">
                             <?php $image2 = get_sub_field('item2_image'); ?>
@@ -119,7 +123,9 @@
         <!-- Item 3 -->
            
                     <?php if ($image3): ?>
-        <div class="grid-section-item grid-section-item-3">
+        <div class="grid-section-item grid-section-item-3" data-aos="fade-up" data-aos-duration="1000"
+            data-aos-delay="100"
+            data-aos-easing="ease-out">
             <a href="<?php the_sub_field('item3_link'); ?>" class="grid-section-link">
                 <div class="grid-section-image-wrapper">
                   
@@ -189,62 +195,4 @@
   update();
 })();
 </script>
-
-<script>
-(function () {
-  const items = document.querySelectorAll('.grid-section-item');
-  if (!items.length) return;
-
-  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
-
-  const FROM_Y = 70;
-  const TO_Y   = 0;
-  const START  = 0.90;
-  const END    = 0.65;
-
-  function extraOffset(el) {
-    if (el.classList.contains('grid-section-item-1')) return 10;
-    if (el.classList.contains('grid-section-item-2')) return 0;
-    if (el.classList.contains('grid-section-item-3')) return 15;
-    return 0;
-  }
-
-  function update() {
-    const vh = window.innerHeight;
-
-    const startLine = vh * START;
-    const endLine   = vh * END;
-
-    items.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-
-      let p = (startLine - rect.top) / (startLine - endLine);
-      p = clamp(p, 0, 1);
-
-      const from = FROM_Y + extraOffset(el);
-      const y = from + (TO_Y - from) * p;
-
-      const opacity = clamp((p - 0.15) / 0.85, 0, 1);
-
-      el.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,0)';
-      el.style.opacity = opacity.toFixed(3);
-    });
-  }
-
-  let ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      update();
-      ticking = false;
-    });
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', update);
-  update();
-})();
-</script>
-
 <?php endif; ?>
