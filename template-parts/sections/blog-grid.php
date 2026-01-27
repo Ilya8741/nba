@@ -51,13 +51,14 @@ function pl_get_img_alt($attachment_id) {
 ?>
 
 
-<section class="section-posts-grid <?php if ( get_sub_field('version') ) : ?> insights-posts-grid <?php endif; ?>">
+<section class="section-posts-grid">
   <?php if ($q->have_posts()) : ?>
-    <div class="<?php if ( get_sub_field('version') ) : ?> insights-posts-grid-items <?php else : ?> section-posts-grid-items <?php endif; ?>">
+    <div class=" section-posts-grid-items ">
       <?php while ($q->have_posts()) : $q->the_post();
         $pid   = get_the_ID();
         $url   = get_permalink($pid);
         $title = get_the_title($pid);
+        $subtitle = function_exists('get_field') ? get_field('subtitle', $pid) : '';
         $excerpt = get_the_excerpt($pid);
         $img_html = '';
         if (has_post_thumbnail($pid)) {
@@ -78,10 +79,16 @@ function pl_get_img_alt($attachment_id) {
                 </svg>
               </span>
             </div>
-            <div class="grid-section-text blog-grid-section-text"><?php echo esc_html($title); ?></div>
-            <?php if ( get_sub_field('version') ) : ?> 
-              <div class="blog-grid-section-excerpt"><?php echo esc_html($excerpt); ?></div>
-            <?php endif; ?>
+            <div class="grid-section-text blog-grid-section-text">  
+              <span class="blog-grid-section-title__main"><?php echo esc_html($title); ?></span>
+              <?php if (!empty($subtitle)) : ?>
+                <span class="blog-grid-section-title__sub"><?php echo esc_html($subtitle); ?></span>
+              <?php endif; ?>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
+                                <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
+                            </svg>
+          </div>
           </a>
         </div>
       <?php endwhile; wp_reset_postdata(); ?>

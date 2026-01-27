@@ -20,6 +20,9 @@ $url = $title = $img_html = '';
 if ($post_obj && $post_obj instanceof WP_Post) {
   $url   = get_permalink($post_obj);
   $title = get_the_title($post_obj);
+  $subtitle = function_exists('get_field')
+  ? get_field('subtitle', $post_obj->ID)
+  : '';
 
   $thumb_id = get_post_thumbnail_id($post_obj);
   if ($thumb_id) {
@@ -38,25 +41,33 @@ if ($post_obj && $post_obj instanceof WP_Post) {
 <div class="blog-hero">
     <div class="blog-hero-wrapper">
         <h1 class="blog-hero-title" data-aos="fade-left">
-              <?php the_sub_field('title'); ?>
+                 <?php
+                    $item1_text = get_sub_field('title');
+                    if ($item1_text) {
+                        echo apply_filters('the_content', $item1_text);
+                    }
+                    ?>
         </h1>
-        <div class="grid-section-item blog-hero-item" data-aos="fade-right">
-  <a href="<?php echo esc_url($url); ?>" class="grid-section-link">
-    <div class="grid-section-image-wrapper">
-      <?php echo $img_html ? $img_html : '<div class="grid-section-image-placeholder" aria-hidden="true"></div>'; ?>
-      <span class="grid-section-icon blog-grid-section-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
-          <path d="M0.771484 1H17.2286V17" stroke="white" stroke-width="1.10345" stroke-linecap="round" stroke-linejoin="round"></path>
-          <path d="M0.771484 17L17.2286 1" stroke="white" stroke-width="1.10345" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-      </span>
-    </div>
-    <div class="grid-section-text blog-grid-section-text" ><?php echo esc_html($title); ?></div>
-  </a>
-</div>
-    <div class="blog-hero-text" data-aos="fade-left">
-        <?php the_sub_field('text'); ?>
-    </div>
+        <div class="blog-hero-item" data-aos="fade-right">
+        <a href="<?php echo esc_url($url); ?>" class="grid-section-link">
+          <div class="grid-section-image-wrapper blog-section-image-wrapper">
+            <?php echo $img_html ? $img_html : '<div class="grid-section-image-placeholder" aria-hidden="true"></div>'; ?>
+          </div>
+          <div class="grid-section-text blog-grid-section-text" >
+          <span class="blog-grid-title">
+    <?php echo esc_html($title); ?>
+  </span>
 
+  <?php if (!empty($subtitle)) : ?>
+    <span class="blog-grid-subtitle">
+      <?php echo esc_html($subtitle); ?>
+    </span>
+  <?php endif; ?>  
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
+                                <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
+                            </svg></div>
+        </a>
+      </div>
     </div>
 </div>

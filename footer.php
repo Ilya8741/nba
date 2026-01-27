@@ -209,9 +209,9 @@
       newBtn.className = btn.className;
       newBtn.innerHTML =
         '<span>' + (btn.value || 'Submit') + '</span>' +
-        '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">' +
-        '<path d="M1 1H13V13" stroke="white" stroke-width="0.5" stroke-linejoin="round"/>' +
-        '<path d="M1 13L13 1" stroke="white" stroke-width="0.5" stroke-linejoin="round"/>' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">' +
+          '<path d="M7 7H17V17" stroke="#221F1C" stroke-linecap="square" stroke-linejoin="round"/>' +
+          '<path d="M7 17L17 7" stroke="#221F1C" stroke-linecap="square" stroke-linejoin="round"/>' +
         '</svg>';
       btn.parentNode.replaceChild(newBtn, btn);
     });

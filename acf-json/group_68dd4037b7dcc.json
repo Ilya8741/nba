@@ -3,6 +3,27 @@
     "title": "Article content",
     "fields": [
         {
+            "key": "field_69777df7f9650",
+            "label": "Subtitle",
+            "name": "subtitle",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68dd4038f5018",
             "label": "Article content",
             "name": "article_content",
@@ -1516,7 +1537,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "insights"
+                "value": "post"
             }
         ]
     ],
@@ -1529,5 +1550,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1760357452
+    "modified": 1769439220
 }

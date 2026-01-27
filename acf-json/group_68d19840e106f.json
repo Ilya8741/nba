@@ -2431,27 +2431,6 @@
                             "bidirectional_target": []
                         },
                         {
-                            "key": "field_68e682b8e9d46",
-                            "label": "Version",
-                            "name": "version",
-                            "aria-label": "",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "message": "",
-                            "default_value": 0,
-                            "allow_in_bindings": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
-                        },
-                        {
                             "key": "field_68ecc67f716bf",
                             "label": "Manual posts",
                             "name": "manual_posts",
@@ -2501,7 +2480,7 @@
                             "label": "Title",
                             "name": "title",
                             "aria-label": "",
-                            "type": "text",
+                            "type": "wysiwyg",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2511,11 +2490,11 @@
                                 "id": ""
                             },
                             "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
+                            "allow_in_bindings": 1,
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
                         },
                         {
                             "key": "field_68de96d0f4a12",
@@ -2544,27 +2523,6 @@
                             "bidirectional": 0,
                             "ui": 1,
                             "bidirectional_target": []
-                        },
-                        {
-                            "key": "field_68de970ff4a13",
-                            "label": "Text",
-                            "name": "text",
-                            "aria-label": "",
-                            "type": "textarea",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "rows": "",
-                            "placeholder": "",
-                            "new_lines": ""
                         }
                     ],
                     "min": "",
@@ -3363,5 +3321,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1769082740
+    "modified": 1769439995
 }
