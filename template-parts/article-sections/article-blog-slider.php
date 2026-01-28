@@ -12,6 +12,9 @@ function pl_get_thumb_alt($post_id){
 ?>
 <div class="hero-slider<?php if (get_sub_field('spacing_top')): ?> hero-slider-top-none<?php endif; ?>" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" data-aos-easing="ease-out">
   <div class="hero-slider-wrapper">
+    <div class="article-hero-slider-header">
+      
+    </div>
     <div class="hero-slider-swiper swiper _swiper" data-slides-count="<?php echo (int)$posts_count; ?>">
       <div class="swiper-wrapper">
 
@@ -34,12 +37,6 @@ function pl_get_thumb_alt($post_id){
               <?php if ($thumb_url): ?>
                 <div class="hero-slider-item">
                   <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($thumb_alt); ?>">
-                  <span class="hero-slider-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M1 1H13V13" stroke="#fff" stroke-width="0.5" stroke-linejoin="round"/>
-                      <path d="M1 13L13 1" stroke="#fff" stroke-width="0.5" stroke-linejoin="round"/>
-                    </svg>
-                  </span>
                 </div>
               <?php else: ?>
                 <div class="hero-slider-item hero-slider-item--ghost"></div>

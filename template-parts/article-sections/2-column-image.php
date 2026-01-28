@@ -1,6 +1,6 @@
 <?php
 $version = strtolower( trim( (string) get_sub_field('version') ) );
-$allowed = ['left','right'];
+$allowed = ['left','right', 'center-without-icon'];
 if (!in_array($version, $allowed, true)) { $version = 'center'; }
 
 $classes = [
