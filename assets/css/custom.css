@@ -282,7 +282,7 @@ body {
   text-decoration: none;
 }
 
-.footer-info-richtext .footer-wysiwyg a::after {
+/* .footer-info-richtext .footer-wysiwyg a::after {
   content: "";
   position: absolute;
   bottom: -1px;
@@ -295,7 +295,7 @@ body {
 
 .footer-info-richtext .footer-wysiwyg a:hover::after {
   width: 100%;
-}
+} */
 
 .footer-menu {
   list-style: none;
@@ -340,6 +340,10 @@ body {
 
 body.home {
   margin-bottom: 0;
+}
+
+body {
+  margin-bottom: 0 !important;
 }
 
 .footer-copyright {
@@ -952,6 +956,7 @@ html {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 46px;
+  overflow: hidden;
 }
 
 .about-grid-header {
@@ -1042,6 +1047,7 @@ html {
 .about-hero {
   padding-bottom: 72px;
   max-width: 100%;
+  overflow: hidden;
 }
 
 .about-hero-header {
@@ -1055,6 +1061,7 @@ html {
   letter-spacing: -1.2px;
   margin-right: auto;
   width: 100%;
+  margin: 0 auto;
 }
 
 .about-swiper .swiper-slide {
@@ -1110,6 +1117,7 @@ html {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 248px;
+  overflow: hidden;
 }
 
 .about-text-grid-left h2 {
@@ -2626,6 +2634,9 @@ html.is-locked {
   position: relative;
   overflow: visible;
   padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
 }
 
 .service-card {
