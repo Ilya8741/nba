@@ -2605,6 +2605,7 @@ html.is-locked {
 
 .services-slider {
   position: relative;
+  padding-top: 100px;
 }
 
 .services-slider-wrapper {
@@ -2722,6 +2723,9 @@ html.is-locked {
 }
 
 @media (max-width: 1000px) {
+  .services-slider {
+    padding-top: 0 !important;
+  }
   .services-slider-wrapper {
     padding: 0;
     padding-bottom: 64px;
