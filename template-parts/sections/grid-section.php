@@ -73,7 +73,7 @@
                                 <img src="<?php echo esc_url($image2['url']); ?>" alt="<?php echo esc_attr($image2['alt']); ?>">
                             <?php endif; ?>
                         </div>
-                        <div class="grid-section-text">
+                        <div class="grid-section-text <?php if (!$image3): ?>grid-section-text-right<?php endif; ?>">
                             <?php
                             $item2_text = get_sub_field('item2_text');
                             if ($item2_text) {
