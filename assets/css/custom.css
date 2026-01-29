@@ -2752,7 +2752,6 @@ html.is-locked {
   }
   .services-slider-wrapper {
     padding: 0;
-    padding-bottom: 64px;
   }
   .services-stack {
     --stick-top: 80px;
