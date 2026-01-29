@@ -2657,6 +2657,8 @@ html.is-locked {
   top: var(--stick-top);
   z-index: var(--z, 1);
   background: transparent;
+  opacity: 0.3;
+  will-change: opacity;
 }
 
 .service-card:not(:first-child) {

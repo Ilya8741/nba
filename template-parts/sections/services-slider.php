@@ -70,3 +70,55 @@
     </div>
   </div>
 </section>
+
+
+<script>
+(function () {
+  const cards = Array.from(document.querySelectorAll('.service-card'));
+  if (!cards.length) return;
+
+  const START_OPACITY = 0.3;
+  const END_OPACITY = 1;
+  const FULL_AT = 0.85; // 85%
+
+  let ticking = false;
+
+  function clamp(v, min, max) {
+    return Math.min(max, Math.max(min, v));
+  }
+
+  function updateOpacity() {
+    const vh = window.innerHeight;
+
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+
+      
+      const progress = clamp(
+        (vh - rect.top) / (vh * FULL_AT),
+        0,
+        1
+      );
+
+      const opacity =
+        START_OPACITY + (END_OPACITY - START_OPACITY) * progress;
+
+      card.style.opacity = opacity.toFixed(3);
+    });
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(updateOpacity);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', updateOpacity);
+
+  updateOpacity();
+})();
+</script>
