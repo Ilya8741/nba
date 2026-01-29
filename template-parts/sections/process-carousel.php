@@ -64,6 +64,10 @@ if ($items && is_array($items) && count($items)) :
                     992: {
                         spaceBetween: 20,
                         slidesPerView: 3.1,
+                    },
+                     1500: {
+                        spaceBetween: 20,
+                        slidesPerView: 3,
                     }
                 }
             });

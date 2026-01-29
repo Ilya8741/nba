@@ -113,7 +113,7 @@ body {
 .text-with-button-wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 8px;
 }
 
 .text-with-button-left {
@@ -135,7 +135,7 @@ body {
 
 .text-with-button-right-content p {
   color: #221f1c;
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
@@ -148,6 +148,11 @@ body {
 }
 
 @media (max-width: 992px) {
+  .text-with-button-right-content p {
+    font-size: 16px;
+    letter-spacing: -0.48px;
+  }
+  
   .text-with-button-wrapper {
     grid-template-columns: repeat(1, 1fr);
     gap: 16px;
@@ -1078,6 +1083,9 @@ html {
 }
 
 @media (max-width: 992px) {
+  .about-hero-swiper-wrapper {
+    padding-left: 24px;
+  }
   .about-swiper .swiper-slide {
     max-width: 345px;
   }
@@ -2283,6 +2291,7 @@ html {
   background: rgba(0, 0, 0, 0.6);
   transition: all 0.2s ease;
   opacity: 0;
+  backdrop-filter: blur(2px);
 }
 
 .team-modal.is-open .team-modal__overlay {
@@ -2931,7 +2940,7 @@ html.is-locked {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 12px;
+  padding-bottom: 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   width: 100%;
 }
@@ -3707,6 +3716,12 @@ letter-spacing: -1.2px;
   overflow: hidden;
 }
 
+@media(min-width: 1500px){
+  .process-slider{
+    padding-right: 46px;
+  }
+}
+
 .process-slider-nav {
   display: flex;
   align-items: center;
@@ -4000,6 +4015,10 @@ letter-spacing: -1.2px;
     font-size: 16px;
     letter-spacing: -0.48px;
   }
+
+  .page-template-services-index .quote-right.quote-right-white + .instafeed{
+  padding-top: 16px;
+}
 }
 
 /* contact-page styles */
