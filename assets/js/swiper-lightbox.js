@@ -7,13 +7,11 @@
     _scrollY = window.scrollY || document.documentElement.scrollTop || 0;
     document.documentElement.classList.add('plb-locked');
     document.body.classList.add('plb-locked');
-    // iOS надёжный способ
     document.body.style.position = 'fixed';
     document.body.style.top = (-_scrollY) + 'px';
     document.body.style.left = '0';
     document.body.style.right = '0';
     document.body.style.width = '100%';
-    // если нужен компенсационный паддинг под скроллбар — добавьте здесь
   }
   function unlockScroll() {
     document.documentElement.classList.remove('plb-locked');
@@ -33,7 +31,10 @@
     var el = document.createElement("div");
     el.className = "plb-overlay";
     el.innerHTML =
-      '<button class="plb-btn plb-close" aria-label="Close"><div class="plb-close-line"></div><div class="plb-close-line"></div></button>' +
+      '<button class="plb-btn plb-close" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">' +
+      '<path d="M2.63672 16.3643L15.3646 3.63634" stroke="white" stroke-linejoin="round"/>' +
+      '<path d="M2.63672 3.63574L15.3646 16.3637" stroke="white" stroke-linejoin="round"/>' +
+      '</svg><span>Close</span></button>' +
       '<div class="plb-swiper swiper"><div class="swiper-wrapper"></div></div>' +
       '<div class="plb-bottombar">' +
         '<button class="plb-btn plb-prev" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none"><path d="M9.48438 17.9707L0.999093 9.48542L9.48437 1.00014" stroke="white" stroke-width="0.5" stroke-linejoin="round"/><path d="M17.9697 9.48542L0.999093 9.48542" stroke="white" stroke-width="0.5" stroke-linejoin="round"/></svg></button>' +

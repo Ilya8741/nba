@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     closeAll();
   });
 
-  /* ---------- MOBILE (ВАЖНО) ---------- */
+  /* ---------- MOBILE ---------- */
   wrapper.addEventListener("click", (e) => {
     const back = e.target.closest("[data-back]");
     if (back) {
@@ -113,3 +113,47 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = willOpen ? "hidden" : "";
   });
 });
+
+
+(function () {
+  const MIN = 0.25;
+  const MAX = 1;
+
+  const svgs = document.querySelectorAll('.scroll-fade-svg');
+  if (!svgs.length) return;
+
+  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+
+  function update() {
+    const vh = window.innerHeight;
+
+    svgs.forEach(svg => {
+      const rect = svg.getBoundingClientRect();
+
+      const start = vh * 0.9;
+      const end   = vh * 0.1;
+
+      let progress = (start - rect.top) / (start - end);
+      progress = clamp(progress, 0, 1);
+
+      const peak = 1 - Math.abs(progress * 2 - 1);
+
+      const opacity = MIN + (MAX - MIN) * peak;
+      svg.style.opacity = opacity.toFixed(3);
+    });
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', update);
+  update();
+})();

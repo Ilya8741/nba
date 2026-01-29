@@ -344,6 +344,27 @@
                             "ui": 0,
                             "ui_on_text": "",
                             "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_697b71cde18fd",
+                            "label": "Padding top none (desktop)",
+                            "name": "padding_top_desktop",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "allow_in_bindings": 1,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         }
                     ],
                     "min": "",
@@ -461,6 +482,27 @@
                             "key": "field_68e4f27be444b",
                             "label": "Padding bottom none",
                             "name": "padding_bottom",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "allow_in_bindings": 1,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_697b794e30f52",
+                            "label": "Padding bottom mobile large",
+                            "name": "padding_bottom_mobile",
                             "aria-label": "",
                             "type": "true_false",
                             "instructions": "",
@@ -740,66 +782,6 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_68e504e8d16a8",
-                            "label": "Button url",
-                            "name": "instafeed_button_url",
-                            "aria-label": "",
-                            "type": "url",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_68e504d3d16a7",
-                            "label": "Button text",
-                            "name": "instafeed_button_text",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
-                        },
-                        {
-                            "key": "field_68e50518d16a9",
-                            "label": "Shortcodes",
-                            "name": "shortcodes",
-                            "aria-label": "",
-                            "type": "wysiwyg",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "allow_in_bindings": 0,
-                            "tabs": "all",
-                            "toolbar": "full",
-                            "media_upload": 1,
-                            "delay": 0
-                        },
-                        {
                             "key": "field_68e50524d16aa",
                             "label": "Instafeed slides",
                             "name": "instafeed_slides",
@@ -848,6 +830,96 @@
                                     "parent_repeater": "field_68e50524d16aa"
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_697b7204e18fe",
+                            "label": "Link",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "allow_in_bindings": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_697b7a3a4e550": {
+                    "key": "layout_697b7a3a4e550",
+                    "name": "text-section",
+                    "label": "Text section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_697b7a464e552",
+                            "label": "Text 1",
+                            "name": "text1",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_697b7a5a4e553",
+                            "label": "Text 2",
+                            "name": "text2",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_697b7a614e554",
+                            "label": "Grid text",
+                            "name": "grid_text",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "allow_in_bindings": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         }
                     ],
                     "min": "",
@@ -884,5 +956,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1769519136
+    "modified": 1769699968
 }

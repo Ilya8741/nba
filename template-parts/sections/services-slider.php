@@ -71,54 +71,66 @@
   </div>
 </section>
 
-
 <script>
 (function () {
+  const stack = document.querySelector('.services-stack');
   const cards = Array.from(document.querySelectorAll('.service-card'));
-  if (!cards.length) return;
+  if (!stack || cards.length < 2) return;
 
-  const START_OPACITY = 0.3;
-  const END_OPACITY = 1;
-  const FULL_AT = 0.85; // 85%
+  const MIN_OPACITY = 0;
+  const MAX_OPACITY = 1;
 
-  let ticking = false;
+  const EARLY_START_MULT = 2.8;
 
   function clamp(v, min, max) {
     return Math.min(max, Math.max(min, v));
   }
 
-  function updateOpacity() {
-    const vh = window.innerHeight;
-
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-
-      
-      const progress = clamp(
-        (vh - rect.top) / (vh * FULL_AT),
-        0,
-        1
-      );
-
-      const opacity =
-        START_OPACITY + (END_OPACITY - START_OPACITY) * progress;
-
-      card.style.opacity = opacity.toFixed(3);
-    });
-
-    ticking = false;
+  function pxToNum(v) {
+    const n = parseFloat(v);
+    return Number.isFinite(n) ? n : 0;
   }
 
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(updateOpacity);
-      ticking = true;
+  function getOverlapPx() {
+    const cs = getComputedStyle(stack);
+    return pxToNum(cs.getPropertyValue('--overlap')) || 160;
+  }
+
+  function update() {
+    const overlap = getOverlapPx();
+    const range = overlap * EARLY_START_MULT;
+
+    for (const c of cards) c.style.opacity = MAX_OPACITY;
+
+    for (let i = 0; i < cards.length - 1; i++) {
+      const prev = cards[i];
+      const next = cards[i + 1];
+
+      const topPx = pxToNum(getComputedStyle(next).top);
+      const nextTop = next.getBoundingClientRect().top;
+
+      let progress = 1 - (nextTop - topPx) / range;
+      progress = clamp(progress, 0, 1);
+
+      next.style.opacity = MAX_OPACITY;
+
+      const prevOpacity = MAX_OPACITY - progress * (MAX_OPACITY - MIN_OPACITY);
+      prev.style.opacity = prevOpacity.toFixed(3);
     }
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', updateOpacity);
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      update();
+      ticking = false;
+    });
+  }
 
-  updateOpacity();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();
 </script>

@@ -1,71 +1,82 @@
-<?php 
-$shortcode = get_sub_field('shortcodes');
-?>
-
 <div class="instafeed" data-aos="fade-up" data-aos-offset="160">
-  <div class="instafeed-header">
-    <h2 class="instafeed-title">
-      <?php the_sub_field('instafeed_title'); ?>
-    </h2>
-    <p class="instafeed-text">
-      <?php the_sub_field('instafeed_text'); ?>
-      <?php if (get_sub_field('instafeed_button_text')): ?>
-        <span><?php the_sub_field('instafeed_follow_text'); ?></span>
-        <a href="<?php the_sub_field('instafeed_button_url'); ?>" class="">
-          <?php the_sub_field('instafeed_button_text'); ?>
-        </a>
-      <?php endif; ?>
-    </p>
+
+  <div class="instafeed-swiper-wrapper">
+    <?php if (have_rows('instafeed_slides')) : ?>
+      <div class="swiper instafeed-swiper">
+        <div class="swiper-wrapper">
+
+          <?php while (have_rows('instafeed_slides')) : the_row();
+            $image = get_sub_field('slide_image');
+
+            if (!$image) continue;
+          ?>
+            <div class="swiper-slide instafeed-slide">
+              <img
+                src="<?php echo esc_url($image['url']); ?>"
+                alt="<?php echo esc_attr($image['alt']); ?>"
+                loading="lazy">
+            </div>
+          <?php endwhile; ?>
+
+        </div>
+      </div>
+    <?php endif; ?>
   </div>
 
-  <?php if ( !empty($shortcode) ) : ?>
-    <div class="instafeed-swiper-shortcode">
-      <?php echo do_shortcode( $shortcode ); ?>
-    </div>
+  <div class="instafeed-link-wrapper">
+    <?php
+    $link = get_sub_field('link');
 
-  <?php else : ?>
-    <div class="instafeed-swiper swiper">
-      <?php
-      $slides = [];
+    if ($link && is_array($link)) :
+      $url    = $link['url'] ?? '';
+      $title  = $link['title'] ?? '';
+      $target = $link['target'] ?? '_self';
 
-      if ( have_rows('instafeed_slides') ) :
-        while ( have_rows('instafeed_slides') ) : the_row();
-          $image = get_sub_field('slide_image');
-          if ( $image ) {
-            $slides[] = $image;
-          }
-        endwhile;
+      if ($url) :
+    ?>
+        <a href="<?php echo esc_url($url); ?>"
+          class="main-link instafeed-main-link"
+          target="<?php echo esc_attr($target); ?>">
+          <span><?php echo esc_html($title ?: 'Follow us'); ?></span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M7 7H17V17" stroke="#221F1C" stroke-linecap="square" stroke-linejoin="round" />
+            <path d="M7 17L17 7" stroke="#221F1C" stroke-linecap="square" stroke-linejoin="round" />
+          </svg>
+        </a>
+    <?php
       endif;
-      ?>
-
-      <div class="swiper-wrapper">
-        <?php for ($i = 0; $i < 2; $i++): ?>
-          <?php foreach ($slides as $image): ?>
-            <div class="swiper-slide">
-              <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-            </div>
-          <?php endforeach; ?>
-        <?php endfor; ?>
-      </div>
-    </div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        new Swiper(".instafeed-swiper", {
-          loop: true,
-          spaceBetween: 8,
-          slidesPerView: 2.5,
-          centeredSlides: false,
-          breakpoints: {
-            992: {
-              spaceBetween: 20,
-              slidesPerView: 4,
-              centeredSlides: true,
-            }
-          },
-        });
-      });
-    </script>
-
-  <?php endif; ?>
+    endif;
+    ?>
+  </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.querySelector('.instafeed-swiper');
+  if (!el) return;
+
+  new Swiper(el, {
+    slidesPerView: 'auto',
+    spaceBetween: 16,
+
+    loop: true,
+    speed: 2000,
+
+    autoplay: {
+      delay: 1000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: false,
+    },
+
+    allowTouchMove: true,
+    grabCursor: true,
+
+    breakpoints: {
+               
+                992: {
+                    spaceBetween: 20
+                } 
+            }
+  });
+});
+</script>

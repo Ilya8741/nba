@@ -22,10 +22,9 @@ if (!empty($manual_ids)) {
     'post_status'         => 'publish',
     'posts_per_page'      => count($manual_ids),
     'post__in'            => $manual_ids,
-    'orderby'             => 'post__in', 
+    'orderby'             => 'post__in',
     'ignore_sticky_posts' => true,
   ];
-
 } else {
   $args = [
     'post_type'           => $post_type,
@@ -42,7 +41,8 @@ if (!empty($manual_ids)) {
 
 $q = new WP_Query($args);
 
-function pl_get_img_alt($attachment_id) {
+function pl_get_img_alt($attachment_id)
+{
   $alt = trim(get_post_meta($attachment_id, '_wp_attachment_image_alt', true));
   if ($alt !== '') return $alt;
   $img_post = get_post($attachment_id);
@@ -65,7 +65,7 @@ function pl_get_img_alt($attachment_id) {
           $thumb_id = get_post_thumbnail_id($pid);
           $src      = get_the_post_thumbnail_url($pid, 'large');
           $alt      = pl_get_img_alt($thumb_id);
-          $img_html = '<img src="'.esc_url($src).'" alt="'.esc_attr($alt).'" loading="lazy" decoding="async">';
+          $img_html = '<img src="' . esc_url($src) . '" alt="' . esc_attr($alt) . '" loading="lazy" decoding="async">';
         }
       ?>
         <div class="grid-section-item blog-grid-item" data-aos="fade-up">
@@ -79,19 +79,20 @@ function pl_get_img_alt($attachment_id) {
                 </svg>
               </span>
             </div>
-            <div class="grid-section-text blog-grid-section-text">  
+            <div class="grid-section-text blog-grid-section-text">
               <span class="blog-grid-section-title__main"><?php echo esc_html($title); ?></span>
               <?php if (!empty($subtitle)) : ?>
                 <span class="blog-grid-section-title__sub"><?php echo esc_html($subtitle); ?></span>
               <?php endif; ?>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
-                                <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
-                            </svg>
-          </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
+                <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
+              </svg>
+            </div>
           </a>
         </div>
-      <?php endwhile; wp_reset_postdata(); ?>
+      <?php endwhile;
+      wp_reset_postdata(); ?>
     </div>
   <?php else : ?>
     <p class="grid-section-empty">No posts found.</p>

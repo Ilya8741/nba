@@ -8,6 +8,9 @@
 
 
                     <div class="article-hero-content-overlay">
+                        <div class="article-hero-content-overlay-block">
+
+                        </div>
                         <h1 class="article-hero-title"><?php echo esc_html(get_the_title()); ?></h1>
                         <div class="article-tags-grid">
                             <?php $tags = get_the_tags(); ?>
@@ -30,18 +33,15 @@
             $text_1 = get_sub_field('text_1');
             $text_2 = get_sub_field('text_2');
 
-            // Architect modal fields (как на скрине)
             $arch_img     = get_sub_field('image_architect');
             $arch_name    = get_sub_field('name_architect');
             $arch_job     = get_sub_field('job_title_architect');
-            $arch_content = get_sub_field('content_architect'); // WYSIWYG
+            $arch_content = get_sub_field('content_architect'); 
 
-            // helper: превращаем <a href="#"> в триггер модалки
             function pl_make_hash_links_modal($html, $modal_id = '#architect-modal-1')
             {
                 if (!$html) return $html;
 
-                // href="#" -> data-modal="#architect-modal-1"
                 $html = preg_replace(
                     '/<a([^>]*?)href=(["\'])#\2([^>]*?)>/i',
                     '<a$1href="javascript:void(0)" data-modal="' . esc_attr($modal_id) . '"$3>',
@@ -51,7 +51,6 @@
                 return $html;
             }
 
-            // Repeater content
             $repeater_html = '';
             if (have_rows('info_repeater')) {
                 ob_start();
@@ -68,11 +67,9 @@
                 $repeater_html = trim(ob_get_clean());
             }
 
-            // Подготовим text_1 / text_2 тоже
             $text_1 = pl_make_hash_links_modal($text_1, '#architect-modal-1');
             $text_2 = pl_make_hash_links_modal($text_2, '#architect-modal-1');
 
-            // Проверка "есть ли что выводить" (чтобы не рендерить пустой .article-hero-content)
             $has_any = false;
             if (!empty(trim(wp_strip_all_tags((string)$text_1)))) $has_any = true;
             if (!empty(trim(wp_strip_all_tags((string)$text_2)))) $has_any = true;
@@ -80,7 +77,15 @@
 
             if ($has_any): ?>
                 <div class="article-hero-content">
-                    <div class="article-hero-content-right">
+                  
+
+                    <?php if ($repeater_html): ?>
+                        <div class="article-hero-info">
+                            <?php echo $repeater_html; ?>
+                        </div>
+                    <?php endif; ?>
+
+                      <div class="article-hero-content-right">
                         <?php if ($text_1): ?>
                             <div class="article-hero-text article-hero-text--1">
                                 <?php echo wp_kses_post($text_1); ?>
@@ -93,12 +98,6 @@
                             </div>
                         <?php endif; ?>
                     </div>
-
-                    <?php if ($repeater_html): ?>
-                        <div class="article-hero-info">
-                            <?php echo $repeater_html; ?>
-                        </div>
-                    <?php endif; ?>
                 </div>
             <?php endif; ?>
 
@@ -117,11 +116,9 @@
     </div>
 </div>
 <?php
-// Рендерим модалку только если реально заполнены поля архитектора
 $has_arch_modal = $arch_img || $arch_name || $arch_job || $arch_content;
 if ($has_arch_modal): ?>
 
-    <!-- TEMPLATE (теперь вне article-hero) -->
     <div id="architect-modal-1" class="team-modal-template" hidden>
         <div class="team-modal__inner">
             <div class="team-modal__media">
@@ -148,7 +145,6 @@ if ($has_arch_modal): ?>
         </div>
     </div>
 
-    <!-- MODAL SHELL (вне article-hero) -->
     <div class="team-modal" aria-hidden="true" data-architect-modal>
         <div class="team-modal__overlay" data-close></div>
         <div class="team-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="team-modal-title">
@@ -170,7 +166,6 @@ if ($has_arch_modal): ?>
         const triggersRoot = document.querySelector('.article-hero');
         if (!triggersRoot) return;
 
-        // модалка теперь НЕ внутри article-hero
         const modal = document.querySelector('.team-modal[data-architect-modal]');
         if (!modal) return;
 
@@ -180,7 +175,6 @@ if ($has_arch_modal): ?>
         const html = document.documentElement;
 
         function openModalFromTemplate(selector) {
-            // template теперь тоже глобально
             const tpl = document.querySelector(selector);
             if (!tpl) return;
 

@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '3.7.6' );
+	define( '_S_VERSION', '3.8.4' );
 }
 
 /**
@@ -258,7 +258,6 @@ function nba_scripts() {
     .plb-swiper .swiper-slide{display:flex;align-items:center;justify-content:center;transition:transform .25s ease, opacity .25s ease;opacity:.5;}
     .plb-swiper .swiper-slide.swiper-slide-active{opacity:1;transform:scale(1);}
     .plb-slide-img{max-width:100%;max-height:100%;}
-    .plb-close{position:absolute;top:24px;right:18px;width:40px;height:40px;border:0;cursor:pointer}
     .plb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer}
   ');
 
