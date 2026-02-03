@@ -3338,6 +3338,7 @@ html.is-locked {
 }
 
 .careers-hero {
+  overflow: hidden;
   margin-top: -92px;
 }
 
@@ -3898,6 +3899,7 @@ padding: 64px 24px;
   aspect-ratio: 1348 / 816;
   height: auto;
   width: 100%;
+  object-fit: cover;
 }
 
 .blog-section-image-wrapper {

@@ -6,8 +6,8 @@
             <div class="careers-hero-content-overlay-block">
 
             </div>
-            <h1 class="careers-hero-title"><?php the_sub_field('title'); ?></h1>
-            <div class="careers-hero-content">
+            <h1 class="careers-hero-title" data-aos="fade-left" data-aos-offset="0" data-aos-duration="600" data-aos-easing="ease-out"><?php the_sub_field('title'); ?></h1>
+            <div class="careers-hero-content" data-aos="fade-right" data-aos-offset="0" data-aos-duration="600" data-aos-easing="ease-out"> 
                 <?php
                 $content = get_sub_field('content');
                 if ($content) {
