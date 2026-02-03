@@ -15,11 +15,11 @@
                         <?php endif; ?>
                     </div>
                     <div class="grid-section-text">
-                        <?php if (!$image3): ?> 
-                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
-                            <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
-                        </svg>
+                        <?php if (!$image3): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
+                                <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
+                            </svg>
                         <?php endif; ?>
                         <?php
                         $item1_text = get_sub_field('item1_text');
@@ -27,17 +27,17 @@
                             echo apply_filters('the_content', $item1_text);
                         }
                         ?>
-                       <?php if ($image3): ?> 
-                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
-                            <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
-                        </svg>
+                        <?php if ($image3): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
+                                <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
+                            </svg>
                         <?php endif; ?>
                     </div>
                 </a>
             </div>
             <?php if ($image3): ?>
-            <svg class="scroll-fade-svg"
+                <svg class="scroll-fade-svg"
                     xmlns="http://www.w3.org/2000/svg"
                     width="69"
                     height="75"
@@ -50,19 +50,19 @@
                     </g>
                     <defs>
                         <linearGradient id="paint0_linear_286_6944" x1="34.209" y1="-32.9996" x2="34.209" y2="107.999">
-                        <stop stop-color="#D9D9D9" />
-                        <stop offset="1" stop-color="#737373" />
+                            <stop stop-color="#D9D9D9" />
+                            <stop offset="1" stop-color="#737373" />
                         </linearGradient>
                         <clipPath id="clip0_286_6944">
-                        <rect width="69" height="75" fill="white" />
+                            <rect width="69" height="75" fill="white" />
                         </clipPath>
                     </defs>
                 </svg>
-             <?php endif; ?>
+            <?php endif; ?>
 
             <!-- Item 2 -->
-             <?php if (!$image3): ?><div class="grid-section-item-wrap"><?php endif; ?>
-                 <?php if (!$image3): ?><div></div><?php endif; ?>
+            <?php if (!$image3): ?><div class="grid-section-item-wrap"><?php endif; ?>
+                <?php if (!$image3): ?><div></div><?php endif; ?>
                 <div class="grid-section-item grid-section-item-2" data-aos="fade-left" data-aos-duration="1000"
                     data-aos-delay="100"
                     data-aos-easing="ease-out">
@@ -88,65 +88,64 @@
                     </a>
                 </div>
                 <?php if (!$image3): ?>
-                     <?php
-                        $link = get_sub_field('link');
-                        if ($link && is_array($link)) :
+                    <?php
+                    $link = get_sub_field('link');
+                    if ($link && is_array($link)) :
                         $url    = $link['url'] ?? '';
                         $title  = $link['title'] ?? '';
                         $target = $link['target'] ?? '_self';
 
                         if ($url) :
-                        ?>
-                        <div data-aos="fade-left" data-aos-duration="1000"
+                    ?>
+                            <div data-aos="fade-left" data-aos-duration="1000"
                                 data-aos-delay="100"
                                 data-aos-easing="ease-out">
-                            <a href="<?php echo esc_url($url); ?>"
-                                class="main-button grid-section-button"
-                                target="<?php echo esc_attr($target); ?>">
-                                <span><?php echo esc_html($title); ?></span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round"/>
-                                    <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                        </div>
-                       
-                        <?php
+                                <a href="<?php echo esc_url($url); ?>"
+                                    class="main-button grid-section-button"
+                                    target="<?php echo esc_attr($target); ?>">
+                                    <span><?php echo esc_html($title); ?></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
+                                        <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                    <?php
                         endif;
-                        endif;
+                    endif;
                     ?>
                 <?php endif; ?>
-             <?php if (!$image3): ?></div><?php endif; ?>
-            
+                <?php if (!$image3): ?>
+                </div><?php endif; ?>
+
         </div>
 
         <!-- Item 3 -->
-           
-                    <?php if ($image3): ?>
-        <div class="grid-section-item grid-section-item-3" data-aos="fade-up" data-aos-duration="1000"
-            data-aos-delay="100"
-            data-aos-easing="ease-out">
-            <a href="<?php the_sub_field('item3_link'); ?>" class="grid-section-link">
-                <div class="grid-section-image-wrapper">
-                  
-                        <img src="<?php echo esc_url($image3['url']); ?>" alt="<?php echo esc_attr($image3['alt']); ?>">
-                    
-                </div>
-                <div class="grid-section-text">
-                    <?php
-                    $item3_text = get_sub_field('item3_text'); 
-                    if ($item3_text) {
-                        echo apply_filters('the_content', $item3_text);
-                    }
-                    ?>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
-                        <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
-                    </svg>
-                </div>
 
-            </a>
-        </div>
+        <?php if ($image3): ?>
+            <div class="grid-section-item grid-section-item-3" data-aos="fade-up" data-aos-duration="1000"
+                data-aos-delay="100"
+                data-aos-easing="ease-out">
+                <a href="<?php the_sub_field('item3_link'); ?>" class="grid-section-link">
+                    <div class="grid-section-image-wrapper">
+                        <img src="<?php echo esc_url($image3['url']); ?>" alt="<?php echo esc_attr($image3['alt']); ?>">
+                    </div>
+                    <div class="grid-section-text">
+                        <?php
+                        $item3_text = get_sub_field('item3_text');
+                        if ($item3_text) {
+                            echo apply_filters('the_content', $item3_text);
+                        }
+                        ?>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 19L12 5" stroke="#221F1C" stroke-linejoin="round" />
+                            <path d="M5 12L19 12" stroke="#221F1C" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+
+                </a>
+            </div>
         <?php endif; ?>
     </div>
 </div>
