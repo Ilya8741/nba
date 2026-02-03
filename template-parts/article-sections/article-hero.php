@@ -1,6 +1,6 @@
 <div class="article-hero">
     <div class="article-hero-wrapper">
-        <div class="article-hero-media-wrapper" data-theme="dark">
+        <div class="article-hero-media-wrapper">
             <?php $image1 = get_sub_field('featured_image'); ?>
             <?php if ($image1): ?>
                 <a class="js-lightbox" href="<?php echo esc_url($image1['url']); ?>">

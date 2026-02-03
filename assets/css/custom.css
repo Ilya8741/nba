@@ -1366,6 +1366,7 @@ html {
 
 .text-section {
   padding: 100px 0;
+  overflow: hidden;
 }
 
 .text-section-wrapper {
@@ -1420,6 +1421,10 @@ html {
   .swiper-slide.slide--narrow
   .black-slide-image {
   aspect-ratio: 335 / 450;
+}
+
+.article-black-slider{
+  overflow: hidden;
 }
 
 @media (max-width: 1200px) {
@@ -3387,7 +3392,7 @@ html.is-locked {
 
   .careers-hero-wrapper {
     aspect-ratio: initial;
-    height: 100vh;
+    height: 584px;
   }
 
   .careers-hero-wrapper::before {
@@ -3775,6 +3780,12 @@ padding: 64px 24px;
   display: none;
 }
 
+.article-hero-content-overlay , .careers-hero-content-overlay {
+      max-width: 1440px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 @media (min-width: 2150px) {
   .article-hero-media-wrapper {
     height: 100vh;
@@ -3783,6 +3794,9 @@ padding: 64px 24px;
 }
 
 @media (max-width: 992px) {
+  .article-hero-media-wrapper .js-lightbox::before {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.60) 83.65%);
+  }
   .article-hero-content-overlay-block {
     display: block;
   }
@@ -3816,6 +3830,8 @@ padding: 64px 24px;
     font-weight: 600;
     line-height: 110%; /* 52.8px */
     letter-spacing: -1.44px;
+    max-width: 310px;
+    margin-top: 72px;
   }
 
   .article-hero {
@@ -4259,6 +4275,7 @@ padding: 64px 24px;
 }
 
 @media (max-width: 992px) {
+
   .two-column-image-main.padding-bottom-mobile {
     padding-bottom: 200px !important;
   }
@@ -4300,6 +4317,13 @@ padding: 64px 24px;
 }
 
 @media (max-width: 768px) {
+    .two-column-left .two-column-image-wrapper,
+  .two-column-right .two-column-image-wrapper,
+  .two-column-center-without-icon .two-column-image-wrapper,
+  .two-column-center .two-column-image-wrapper {
+    gap: 64px;
+  }
+
   .two-column-image-wrapper {
     grid-template-columns: repeat(1, 1fr);
     padding: 0 24px;
@@ -5094,10 +5118,20 @@ form.wpcf7-form br {
   color: rgb(124, 124, 124) !important;
 }
 
-.contact-select-wrapper .contact-select {
+.contact-input[type="date"]{
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.contact-select-wrapper .contact-select , .contact-input[type="date"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  
+}
+
+.contact-select-wrapper .contact-select {
+  opacity: 0.75 !important;
 }
 
 .contact-select-wrapper {
@@ -5212,7 +5246,7 @@ form.wpcf7-form br {
   }
 
   .hero-slider-wrapper {
-    padding: 0 24px;
+    padding: 0 0 0 24px;
   }
 
   .testimonials-hero-slider .hero-slider-swiper {
