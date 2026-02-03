@@ -4891,12 +4891,38 @@ padding: 64px 24px;
 
 .contact-input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(2);
-  opacity: 0.75;
+  opacity: 0;
   cursor: pointer;
 }
 
-.contact-date {
-  margin-top: 14px;
+.date-field {
+  position: relative;
+}
+
+.input-date-label {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #FFF !important;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.48px;
+}
+
+.contact-input[type="date"] {
+
+}
+
+.date-field.is-active .contact-input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.75 !important;
+}
+
+.date-field.is-active .input-date-label {
+  opacity: 0;
 }
 
 .contact-select-wrapper-one {
