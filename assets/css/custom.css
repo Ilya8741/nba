@@ -4895,7 +4895,7 @@ padding: 64px 24px;
   cursor: pointer;
 }
 
-.contact-input[type="date"] {
+.contact-date {
   margin-top: 14px;
 }
 
@@ -5114,20 +5114,17 @@ form.wpcf7-form br {
   z-index: 1;
 }
 
-.contact-input[type="date"]::placeholder {
-  color: rgb(124, 124, 124) !important;
-}
-
 .contact-input[type="date"]{
   max-width: 100% !important;
   width: 100% !important;
+  height: 61.6px !important;
+  margin-top: 14px !important;
 }
 
-.contact-select-wrapper .contact-select , .contact-input[type="date"] {
+.contact-select-wrapper .contact-select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  
 }
 
 .contact-select-wrapper .contact-select {
@@ -5137,6 +5134,15 @@ form.wpcf7-form br {
 .contact-select-wrapper {
   position: relative;
   margin-top: 14px;
+}
+
+.contact-date{
+  position: relative;
+}
+
+.contact-date .contact-input[type="date"]{
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .contact-select-wrapper svg {
