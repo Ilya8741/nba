@@ -5118,10 +5118,11 @@ form.wpcf7-form br {
   max-width: 100% !important;
   width: 100% !important;
   height: 61.6px !important;
+  max-height: 61.6px;
   margin-top: 14px !important;
 }
 
-.contact-select-wrapper .contact-select {
+.contact-select-wrapper .contact-select, .contact-input[type="date"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -5134,15 +5135,6 @@ form.wpcf7-form br {
 .contact-select-wrapper {
   position: relative;
   margin-top: 14px;
-}
-
-.contact-date{
-  position: relative;
-}
-
-.contact-date .contact-input[type="date"]{
-  width: 100% !important;
-  max-width: 100% !important;
 }
 
 .contact-select-wrapper svg {
