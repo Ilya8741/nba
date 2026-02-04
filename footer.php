@@ -137,9 +137,32 @@
               </svg>
           </a>
         </div>
-        <span class="footer-copyright">
+        <div class="footer-copyright-menu">
+         
+        <?php
+    $link = get_field('link', 'footer_options');
+
+    if ($link && is_array($link)) :
+      $url    = $link['url'] ?? '';
+      $title  = $link['title'] ?? '';
+      $target = $link['target'] ?? '_self';
+
+      if ($url) :
+    ?>
+        <a href="<?php echo esc_url($url); ?>"
+          class="main-link footer-main-link"
+          target="<?php echo esc_attr($target); ?>">
+          <span><?php echo esc_html($title ?: 'Privacy policy'); ?></span>
+        </a>
+    <?php
+      endif;
+    endif;
+    ?>
+      <span class="footer-copyright">
          <?php echo esc_html($copyright); ?>
         </span>
+        </div>
+       
 		</div>
 
 	</div>
