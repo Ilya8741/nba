@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '4.0.6' );
+	define( '_S_VERSION', '4.0.7' );
 }
 
 /**
@@ -356,7 +356,6 @@ add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mime
 }, 10, 5);
 
 add_action('init', function () {
-  // Portfolio
   register_post_type('portfolio', [
     'label'           => 'Portfolio',
     'labels'          => [
@@ -368,14 +367,25 @@ add_action('init', function () {
       'all_items' => 'All Portfolio'
     ],
     'public'          => true,
-    'has_archive'     => true,         
-    'rewrite'         => ['slug' => 'portfolio'],
-    'show_in_rest'    => true,      
+    'has_archive'     => true,
+    'rewrite'         => ['slug' => 'projects', 'with_front' => false],
+    'show_in_rest'    => true,
     'menu_icon'       => 'dashicons-portfolio',
     'supports'        => ['title','editor','thumbnail','excerpt','revisions'],
     'taxonomies'      => ['category','post_tag'],
   ]);
-
 });
+
+add_action('template_redirect', function () {
+  if (is_singular('portfolio')) {
+    $requested = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+
+    if (str_starts_with($requested, 'portfolio/')) {
+      wp_safe_redirect(get_permalink(), 301);
+      exit;
+    }
+  }
+});
+
 
 add_filter('big_image_size_threshold', '__return_false');

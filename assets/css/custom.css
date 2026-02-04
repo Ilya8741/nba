@@ -4709,11 +4709,9 @@ padding: 64px 24px;
   gap: 8px;
   margin-top: 32px;
 }
-
 .contact-button {
   letter-spacing: -0.48px;
   gap: 4px;
-
 }
 
 .contact-page + .instafeed {
