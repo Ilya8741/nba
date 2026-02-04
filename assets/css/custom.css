@@ -1243,7 +1243,6 @@ html {
   margin-top: 16px;
   color: #221f1c;
   text-align: right;
-  font-family: "DM Sans";
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -2944,7 +2943,7 @@ html.is-locked {
 }
 
 .section-posts-grid-items .blog-grid-item:nth-child(9) img {
-  aspect-ratio: 926 / 640;
+ aspect-ratio: 926 / 640;
 }
 
 .section-posts-grid .section-posts-grid-items .blog-grid-item:nth-child(15) {
@@ -2988,7 +2987,7 @@ html.is-locked {
 
 @media (max-width: 992px) {
   .section-posts-grid {
-    padding-bottom: 112px;
+    padding-bottom: 90px;
   }
   .section-posts-grid .section-posts-grid-items {
     grid-template-columns: repeat(1, 1fr);
@@ -3302,7 +3301,7 @@ html.is-locked {
   gap: 4px;
 }
 
-.article-tag {
+.article-tags-grid p {
   color: #fff;
   font-size: 16px;
   font-style: normal;
@@ -3310,10 +3309,7 @@ html.is-locked {
   line-height: 125%; /* 20px */
   letter-spacing: -0.48px;
   text-decoration: none;
-}
-
-.article-tag--empty {
-  color: #999;
+  text-align: right;
 }
 
 /* careers-hero */
@@ -3365,6 +3361,9 @@ html.is-locked {
 }
 
 @media (max-width: 992px) {
+  .article-tags-grid p  {
+    text-align: left;
+  }
   .careers-hero {
     margin-top: -96px;
   }
@@ -3706,7 +3705,7 @@ padding: 64px 24px;
 .article-hero-content-wrapper {
   position: relative;
   z-index: 2;
-  padding-top: 64px;
+  padding-top: 80px;
   overflow: visible;
 }
 
@@ -4711,6 +4710,12 @@ padding: 64px 24px;
   margin-top: 32px;
 }
 
+.contact-button {
+  letter-spacing: -0.48px;
+  gap: 4px;
+
+}
+
 .contact-page + .instafeed {
   padding-top: 115px;
 }
@@ -4911,18 +4916,6 @@ padding: 64px 24px;
   font-weight: 400;
   line-height: 28px;
   letter-spacing: -0.48px;
-}
-
-.contact-input[type="date"] {
-
-}
-
-.date-field.is-active .contact-input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0.75 !important;
-}
-
-.date-field.is-active .input-date-label {
-  opacity: 0;
 }
 
 .contact-select-wrapper-one {
@@ -5296,6 +5289,15 @@ form.wpcf7-form br {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+  }
+
+  .contact-button {
+    width: 100%;
+    max-width: 175px;
+    flex-direction: row-reverse;
+    letter-spacing: -0.48px;
+    gap: 4px;
+    justify-content: flex-end;
   }
   .contact-page-hb-info__link.hb-info__link:not(
       .contact-page-hb-info__link.contact-page-hb-info__link-address

@@ -11,17 +11,14 @@
                         <div class="article-hero-content-overlay-block">
 
                         </div>
-                        <h1 class="article-hero-title"><?php echo esc_html(get_the_title()); ?></h1>
-                        <div class="article-tags-grid">
-                            <?php $tags = get_the_tags(); ?>
-                            <?php if ($tags) : foreach ($tags as $tag) : ?>
-                                    <span class="article-tag">
-                                        <?php echo esc_html($tag->name); ?>
-                                    </span>
-                                <?php endforeach;
-                            else : ?>
-                                <span class="article-tag article-tag--empty">No tags</span>
-                            <?php endif; ?>
+                        <h1 class="article-hero-title" data-aos="fade-left" data-aos-offset="0" data-aos-duration="600" data-aos-easing="ease-out"><?php echo esc_html(get_the_title()); ?></h1>
+                        <div class="article-tags-grid" data-aos="fade-right" data-aos-offset="0" data-aos-duration="600" data-aos-easing="ease-out">
+                            <?php
+                            $tags = get_sub_field('tags');
+                            if ($tags) {
+                                echo apply_filters('the_content', $tags);
+                            }
+                            ?>
                         </div>
                     </div>
                 </a>
@@ -55,7 +52,7 @@
             if (have_rows('info_repeater')) {
                 ob_start();
                 while (have_rows('info_repeater')) : the_row();
-                    $c = get_sub_field('content'); // WYSIWYG
+                    $c = get_sub_field('content');
                     if (!$c) continue;
 
                     $c = pl_make_hash_links_modal($c, '#architect-modal-1');
@@ -77,15 +74,13 @@
 
             if ($has_any): ?>
                 <div class="article-hero-content">
-                  
-
                     <?php if ($repeater_html): ?>
-                        <div class="article-hero-info">
+                        <div class="article-hero-info" data-aos="fade-left" data-aos-duration="600" data-aos-easing="ease-out">
                             <?php echo $repeater_html; ?>
                         </div>
                     <?php endif; ?>
 
-                      <div class="article-hero-content-right">
+                      <div class="article-hero-content-right" data-aos="fade-right" data-aos-duration="600" data-aos-easing="ease-out">
                         <?php if ($text_1): ?>
                             <div class="article-hero-text article-hero-text--1">
                                 <?php echo wp_kses_post($text_1); ?>

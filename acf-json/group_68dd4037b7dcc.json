@@ -71,6 +71,27 @@
                             "preview_size": "medium"
                         },
                         {
+                            "key": "field_6983085253be5",
+                            "label": "Tags",
+                            "name": "tags",
+                            "aria-label": "",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "allow_in_bindings": 0,
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
+                        },
+                        {
                             "key": "field_6978b7efaebd6",
                             "label": "Text 1",
                             "name": "text_1",
@@ -956,5 +977,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1769699968
+    "modified": 1770195156
 }
