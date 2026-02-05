@@ -24,29 +24,26 @@
   </div>
 
   <div class="instafeed-link-wrapper">
-    <?php
-    $link = get_sub_field('link');
+<?php
+$link = get_sub_field('link');
 
-    if ($link && is_array($link)) :
-      $url    = $link['url'] ?? '';
-      $title  = $link['title'] ?? '';
-      $target = $link['target'] ?? '_self';
+if ($link && is_array($link)) :
+  $url    = 'https://www.instagram.com/neilboddisonassociatesltd/?hl=en';
+  $title  = $link['title'] ?? '';
+  $target = $link['target'] ?? '_self';
+?>
+  <a href="<?php echo esc_url($url); ?>"
+    class="main-link instafeed-main-link"
+    target="_blank">
+    <span><?php echo esc_html($title ?: 'Follow us'); ?></span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M7 7H17V17" stroke="#221F1C" stroke-linecap="square" stroke-linejoin="round" />
+      <path d="M7 17L17 7" stroke="#221F1C" stroke-linecap="square" stroke-linejoin="round" />
+    </svg>
+  </a>
+<?php endif; ?>
 
-      if ($url) :
-    ?>
-        <a href="<?php echo esc_url($url); ?>"
-          class="main-link instafeed-main-link"
-          target="<?php echo esc_attr($target); ?>">
-          <span><?php echo esc_html($title ?: 'Follow us'); ?></span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M7 7H17V17" stroke="#221F1C" stroke-linecap="square" stroke-linejoin="round" />
-            <path d="M7 17L17 7" stroke="#221F1C" stroke-linecap="square" stroke-linejoin="round" />
-          </svg>
-        </a>
-    <?php
-      endif;
-    endif;
-    ?>
+
   </div>
 </div>
 

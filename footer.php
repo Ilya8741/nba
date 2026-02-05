@@ -10,7 +10,7 @@
 <footer id="colophon" class="site-footer" data-theme="dark">
 	<div class="site-footer-wrapper">
 		<div class="site-footer-header">
-			<div class="site-footer-header-links-wrapper" data-aos="fade-up" data-aos-duration="1000">
+			<div class="site-footer-header-links-wrapper" data-aos-offset="0" data-aos="fade-up" data-aos-duration="1000">
 		<?php
       $image1 = get_field('footer_image1', 'footer_options');
 
