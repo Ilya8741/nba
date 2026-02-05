@@ -3203,7 +3203,7 @@ html.is-locked {
   font-size: 16px;
   font-style: normal;
   font-weight: 300;
-  line-height: 140%;
+  line-height: 150%;
   letter-spacing: -0.4px;
   display: flex;
   flex-direction: column;
@@ -3245,7 +3245,7 @@ html.is-locked {
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 110%;
+  line-height: 150%;
   max-width: 927px;
 }
 
